@@ -43,6 +43,7 @@ public class Tela5 extends javax.swing.JFrame {
         jButton3.setText("Alterar dados de medico");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(17, 17, 53));
         jLabel3.setText("Gerencia");
         jLabel3.setToolTipText("");
 

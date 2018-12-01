@@ -83,6 +83,7 @@ public class Tela6 extends javax.swing.JFrame {
         jLabel5.setText("Especialidade:");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(17, 17, 53));
         jLabel3.setText("                                  Cadastrar médico");
         jLabel3.setToolTipText("");
 

@@ -57,7 +57,7 @@
               <Component id="jLabel8" min="-2" pref="190" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="299" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,6 +113,9 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="24" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="35" green="11" red="11" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="    Alterar cadastro de m&#xe9;dico"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
