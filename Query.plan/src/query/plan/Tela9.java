@@ -66,7 +66,7 @@ public class Tela9 extends javax.swing.JFrame {
         jLabel3.setToolTipText("");
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel8.setText("Agendinha GO");
+        jLabel8.setText("tela repetida");
         jLabel8.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
