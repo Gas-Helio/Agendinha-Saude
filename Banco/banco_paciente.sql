@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `banco` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `banco`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: banco
@@ -25,6 +23,7 @@ DROP TABLE IF EXISTS `paciente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `paciente` (
+  `Senha` varchar(25) DEFAULT NULL,
   `Perfil` text,
   `CPF` varchar(20) NOT NULL,
   `Nome` varchar(20) NOT NULL,
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-01 10:14:38
+-- Dump completed on 2018-12-02 13:27:19
