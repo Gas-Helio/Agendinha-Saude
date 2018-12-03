@@ -78,8 +78,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="CPFCadastroMedico" alignment="0" max="32767" attributes="0"/>
-                              <Component id="IdadeCadastroMedico" max="32767" attributes="0"/>
-                              <Component id="NomeCadastroMedico" alignment="0" max="32767" attributes="0"/>
+                              <Component id="NomeCadastroMedico" max="32767" attributes="0"/>
+                              <Component id="CRMCadastroMedico" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -88,19 +88,19 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="AlturaCadastroMedico" max="32767" attributes="0"/>
+                                  <Component id="ValorCadastroMedico" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="PesoCadastroMedico" max="32767" attributes="0"/>
+                                  <Component id="DescCadastroMedico" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="PACadastroMedico" max="32767" attributes="0"/>
+                          <Component id="EspCadastroMedico" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -118,27 +118,27 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="IdadeCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="NomeCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="NomeCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CRMCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="PACadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="EspCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="PesoCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="DescCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="AlturaCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ValorCadastroMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -151,10 +151,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="IdadeCadastroMedico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value=" "/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="NomeCadastroMedico">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -171,12 +168,9 @@
             <Property name="text" type="java.lang.String" value="Nome: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="NomeCadastroMedico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value=" "/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="CRMCadastroMedico">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NomeCadastroMedicoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CRMCadastroMedicoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -194,10 +188,7 @@
             <Property name="text" type="java.lang.String" value="Especialidade:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="PACadastroMedico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value=" "/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="EspCadastroMedico">
         </Component>
         <Component class="javax.swing.JButton" name="ButaoCadastrarUsuario">
           <Properties>
@@ -206,11 +197,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButaoCadastrarUsuarioActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="CPFCadastroMedico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value=" "/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="ButaoCancelarCadastroUsuario">
           <Properties>
@@ -223,15 +214,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButaoCancelarCadastroUsuarioActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="PesoCadastroMedico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value=" "/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="DescCadastroMedico">
         </Component>
-        <Component class="javax.swing.JTextField" name="AlturaCadastroMedico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value=" "/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="ValorCadastroMedico">
         </Component>
       </SubComponents>
     </Container>

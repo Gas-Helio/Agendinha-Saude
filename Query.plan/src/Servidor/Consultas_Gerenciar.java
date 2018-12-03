@@ -5,8 +5,6 @@
  */
 package Servidor;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,12 +15,12 @@ import java.util.logging.Logger;
  *
  * @author Patrick
  */
-public class Paciente_Gerenciar extends javax.swing.JFrame {
+public class Consultas_Gerenciar extends javax.swing.JFrame {
 
     /**
      * Creates new form Tela5
      */
-    public Paciente_Gerenciar() {
+    public Consultas_Gerenciar() {
         initComponents();
     }
 
@@ -47,7 +45,7 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Pacientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Consultas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         jButton2.setText("Cadastrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -71,14 +69,14 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CPF", "Nome", "Idade", "Peso", "Altura"
+                "ID", "Médico", "Paciente", "Data", "Horário"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -94,12 +92,11 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
             TabelaMedicos.getColumnModel().getColumn(0).setResizable(false);
             TabelaMedicos.getColumnModel().getColumn(0).setPreferredWidth(1);
             TabelaMedicos.getColumnModel().getColumn(1).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(200);
             TabelaMedicos.getColumnModel().getColumn(2).setResizable(false);
             TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(200);
             TabelaMedicos.getColumnModel().getColumn(3).setResizable(false);
             TabelaMedicos.getColumnModel().getColumn(4).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -194,7 +191,7 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
         try {
             bd.rs.first();
         } catch (SQLException ex) {
-            Logger.getLogger(Paciente_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Consultas_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             do {
@@ -210,13 +207,14 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
                         bd.rs.getString("tell")
                     });
                 } catch (SQLException ex) {
-                    Logger.getLogger(Paciente_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Consultas_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             } while (bd.rs.next());
         } catch (SQLException ex) {
-            Logger.getLogger(Paciente_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Consultas_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //CriarTabela();
         //CriarTabela();
     }
 
@@ -228,7 +226,7 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Paciente_Gerenciar().setVisible(true);
+                new Consultas_Gerenciar().setVisible(true);
             }
         });
     }

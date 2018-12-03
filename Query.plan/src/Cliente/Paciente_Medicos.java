@@ -38,7 +38,7 @@ public class Paciente_Medicos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Consultar Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         jButton2.setText("Marcar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -59,14 +59,14 @@ public class Paciente_Medicos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CPF", "Nome", "Especialidade"
+                "CPF", "Nome", "Especialidade"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -80,13 +80,11 @@ public class Paciente_Medicos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TabelaMedicos);
         if (TabelaMedicos.getColumnModel().getColumnCount() > 0) {
             TabelaMedicos.getColumnModel().getColumn(0).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(0).setPreferredWidth(1);
+            TabelaMedicos.getColumnModel().getColumn(0).setPreferredWidth(100);
             TabelaMedicos.getColumnModel().getColumn(1).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(150);
             TabelaMedicos.getColumnModel().getColumn(2).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(150);
-            TabelaMedicos.getColumnModel().getColumn(3).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(3).setPreferredWidth(100);
+            TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

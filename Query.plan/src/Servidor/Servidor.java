@@ -25,16 +25,12 @@ public class Servidor extends Thread {
             System.out.println("Tipo: " + msg[2]);
 
             if ("Salvar".equals(msg[0])) {
-                if (msg[2] == "Medico") {
-                    SalvarMedico(msg[1], msg[2]);
+                if ("Paciente".equals(msg[2])) {
+                    SalvarPaciente(msg[1]);
                 }
-                if (msg[2] == "Paciente") {
-                    SalvarMedico(msg[1], msg[2]);
+                if ("Consulta".equals(msg[2])) {
+                    SalvarConsulta(msg[1]);
                 }
-                if (msg[2] == "Consulta") {
-                    SalvarMedico(msg[1], msg[2]);
-                }
-
             }
 
             if ("Recuperar".equals(msg[0])) {
@@ -48,7 +44,7 @@ public class Servidor extends Thread {
 
     public String Pegar(String cod, String tip) throws FileNotFoundException, IOException {
         String recebe = null;
-        File Arquivo = tipo(tip);
+        File Arquivo = new File("Opa.txt");
 
         FileReader reader = new FileReader(Arquivo);
         try (BufferedReader input = new BufferedReader(reader)) {
@@ -69,12 +65,12 @@ public class Servidor extends Thread {
         return recebe;
     }
 
-    private void SalvarMedico(String salvar) throws IOException {
+    private void SalvarPaciente(String salvar) throws IOException {
         String[] coluna = salvar.split(";");
 
         bd.connection();
 
-        String sql = "insert into cliente (nome, estado, cidade, bairro, endereco, tell, cpf) values (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into paciente (CPF, Nome, Idade, Peso, Altura, Login, Senha) values (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement stm = bd.con.prepareStatement(sql);
@@ -95,14 +91,38 @@ public class Servidor extends Thread {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket servidor = new ServerSocket(12345);
-        System.out.println("Porta 12345 aberta!");
+    private void SalvarConsulta(String salvar) throws IOException {
+        String[] coluna = salvar.split(";");
 
-        while (true) {
-            Servidor handler = new Servidor(servidor.accept());
-            Thread t = new Thread(handler);
-            t.start();
+        bd.connection();
+
+        String sql = "insert into consultas (id, CPFM, CPFP, DataC, Horario) values (?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement stm = bd.con.prepareStatement(sql);
+
+            stm.setString(0, coluna[0]);
+            stm.setString(1, coluna[1]);
+            stm.setString(2, coluna[2]);
+            stm.setString(3, coluna[3]);
+            stm.setString(4, coluna[4]);
+
+            stm.execute();
+            stm.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de conexão!!");
         }
     }
+
+//    public static void main(String[] args) throws IOException {
+//        ServerSocket servidor = new ServerSocket(12345);
+//        System.out.println("Porta 12345 aberta!");
+//
+//        while (true) {
+//            Servidor handler = new Servidor(servidor.accept());
+//            Thread t = new Thread(handler);
+//            t.start();
+//        }
+//    }
 }

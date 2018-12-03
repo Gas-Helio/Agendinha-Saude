@@ -8,7 +8,7 @@ public class ConectaBanco {
     public Statement stm;
     public ResultSet rs;
     private String driver = "com.mysql.jdbc.Driver";
-    private String caminho = "jdbc:mysql://localhost/dipai";
+    private String caminho = "jdbc:mysql://localhost/banco";
     private String usuario = "root";
     private String senha = "";
     public Connection con;
