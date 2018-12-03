@@ -24,12 +24,11 @@ DROP TABLE IF EXISTS `medico`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `medico` (
   `CPF` varchar(20) NOT NULL,
-  `IdEsp` int(11) DEFAULT NULL,
   `Nome` varchar(20) NOT NULL,
   `CRM` varchar(20) NOT NULL,
-  PRIMARY KEY (`CPF`),
-  KEY `IdEsp` (`IdEsp`),
-  CONSTRAINT `IdEsp` FOREIGN KEY (`IdEsp`) REFERENCES `especialidade` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `Descricao` text NOT NULL,
+  `Valor` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`CPF`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-03  9:57:13
+-- Dump completed on 2018-12-03 10:41:00
