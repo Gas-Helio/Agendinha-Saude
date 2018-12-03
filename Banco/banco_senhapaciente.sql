@@ -16,12 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping events for database 'banco'
+-- Table structure for table `senhapaciente`
 --
 
+DROP TABLE IF EXISTS `senhapaciente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `senhapaciente` (
+  `CPF` varchar(20) NOT NULL,
+  `senha` varchar(11) NOT NULL,
+  KEY `CPF` (`CPF`),
+  CONSTRAINT `CPF` FOREIGN KEY (`CPF`) REFERENCES `paciente` (`CPF`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
--- Dumping routines for database 'banco'
+-- Dumping data for table `senhapaciente`
 --
+
+LOCK TABLES `senhapaciente` WRITE;
+/*!40000 ALTER TABLE `senhapaciente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `senhapaciente` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
