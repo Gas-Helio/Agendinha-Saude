@@ -232,8 +232,9 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
             stm.setString(4, coluna[3]);
             stm.setString(5, coluna[4]);
             stm.setString(6, coluna[5]);
-
+            System.out.println("Aq ele vai");
             stm.execute();
+            System.out.println("Já num printa");
             stm.close();
             
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");

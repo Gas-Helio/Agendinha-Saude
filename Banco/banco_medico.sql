@@ -27,16 +27,10 @@ CREATE TABLE `medico` (
   `CPF` varchar(20) NOT NULL,
   `Nome` varchar(20) NOT NULL,
   `CRM` varchar(20) NOT NULL,
-<<<<<<< HEAD
-  `Descricao` text NOT NULL,
-  `Valor` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`CPF`)
-=======
   `Espec` varchar(45) NOT NULL,
   `Desc` varchar(300) NOT NULL,
   `Valor` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`)
->>>>>>> 546bf811fd641f1e2b53ef4ef187f4706dba4704
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,8 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-<<<<<<< HEAD
--- Dump completed on 2018-12-03 10:41:00
-=======
--- Dump completed on 2018-12-03 13:57:52
->>>>>>> 546bf811fd641f1e2b53ef4ef187f4706dba4704
+-- Dump completed on 2018-12-03 14:32:28
