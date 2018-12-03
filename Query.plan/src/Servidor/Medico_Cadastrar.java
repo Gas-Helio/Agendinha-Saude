@@ -221,7 +221,7 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
 
         bd.connection();
 
-        String sql = "insert into medico (CPF, Nome, CRM, Espec, Desc, Valor) values (?, ?, ?, ?, ?, ?)";
+        String sql = "insert into medico (CPF, Nome, CRM, Especializacao, Descricao, Valor) values (?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement stm = bd.con.prepareStatement(sql);
@@ -241,6 +241,7 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro de conexão!!");
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_ButaoCadastrarUsuarioActionPerformed
 

@@ -25,13 +25,13 @@ DROP TABLE IF EXISTS `medico`;
 CREATE TABLE `medico` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `CPF` varchar(20) NOT NULL,
-  `Nome` varchar(20) NOT NULL,
+  `Nome` varchar(40) NOT NULL,
   `CRM` varchar(20) NOT NULL,
-  `Espec` varchar(45) NOT NULL,
-  `Desc` varchar(300) NOT NULL,
+  `Especializacao` varchar(45) NOT NULL,
+  `Descricao` varchar(300) NOT NULL,
   `Valor` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `medico` (
 
 LOCK TABLES `medico` WRITE;
 /*!40000 ALTER TABLE `medico` DISABLE KEYS */;
+INSERT INTO `medico` VALUES (1,'4','4','4','4','4','4');
 /*!40000 ALTER TABLE `medico` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-03 14:32:28
+-- Dump completed on 2018-12-03 15:56:26
