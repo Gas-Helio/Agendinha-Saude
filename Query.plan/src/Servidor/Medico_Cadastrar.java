@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package query.plan;
+package Servidor;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,20 +32,20 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        IdadeCadastroMedico = new javax.swing.JTextField();
+        NomeCadastroMedico = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        NomeCadastroMedico = new javax.swing.JTextField();
+        CRMCadastroMedico = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        PACadastroMedico = new javax.swing.JTextField();
+        EspCadastroMedico = new javax.swing.JTextField();
         ButaoCadastrarUsuario = new javax.swing.JButton();
         CPFCadastroMedico = new javax.swing.JTextField();
         ButaoCancelarCadastroUsuario = new javax.swing.JButton();
-        PesoCadastroMedico = new javax.swing.JTextField();
-        AlturaCadastroMedico = new javax.swing.JTextField();
+        DescCadastroMedico = new javax.swing.JTextField();
+        ValorCadastroMedico = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -50,18 +54,15 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastrar Médico", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
-        IdadeCadastroMedico.setText(" ");
-
         jLabel1.setText("CPF:");
 
         jLabel6.setText("Valor:");
 
         jLabel2.setText("Nome: ");
 
-        NomeCadastroMedico.setText(" ");
-        NomeCadastroMedico.addActionListener(new java.awt.event.ActionListener() {
+        CRMCadastroMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NomeCadastroMedicoActionPerformed(evt);
+                CRMCadastroMedicoActionPerformed(evt);
             }
         });
 
@@ -71,12 +72,13 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
 
         jLabel5.setText("Especialidade:");
 
-        PACadastroMedico.setText(" ");
-
         ButaoCadastrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/success.png"))); // NOI18N
         ButaoCadastrarUsuario.setText("Cadastrar");
-
-        CPFCadastroMedico.setText(" ");
+        ButaoCadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButaoCadastrarUsuarioActionPerformed(evt);
+            }
+        });
 
         ButaoCancelarCadastroUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/error.png"))); // NOI18N
         ButaoCancelarCadastroUsuario.setText("Cancelar");
@@ -85,10 +87,6 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
                 ButaoCancelarCadastroUsuarioActionPerformed(evt);
             }
         });
-
-        PesoCadastroMedico.setText(" ");
-
-        AlturaCadastroMedico.setText(" ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -109,23 +107,23 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CPFCadastroMedico)
-                            .addComponent(IdadeCadastroMedico)
-                            .addComponent(NomeCadastroMedico)))
+                            .addComponent(NomeCadastroMedico)
+                            .addComponent(CRMCadastroMedico)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AlturaCadastroMedico))
+                                .addComponent(ValorCadastroMedico))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(PesoCadastroMedico))))
+                                .addComponent(DescCadastroMedico))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PACadastroMedico)))
+                        .addComponent(EspCadastroMedico)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -138,23 +136,23 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(IdadeCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NomeCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(NomeCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CRMCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(PACadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EspCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(PesoCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DescCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(AlturaCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ValorCadastroMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButaoCadastrarUsuario)
@@ -209,61 +207,62 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NomeCadastroMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeCadastroMedicoActionPerformed
+    private void CRMCadastroMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRMCadastroMedicoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NomeCadastroMedicoActionPerformed
+    }//GEN-LAST:event_CRMCadastroMedicoActionPerformed
 
     private void ButaoCancelarCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCancelarCadastroUsuarioActionPerformed
         dispose();
     }//GEN-LAST:event_ButaoCancelarCadastroUsuarioActionPerformed
 
+    private void ButaoCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCadastrarUsuarioActionPerformed
+
+        String[] coluna = {CPFCadastroMedico.getText(), NomeCadastroMedico.getText(), CRMCadastroMedico.getText(), EspCadastroMedico.getText(), DescCadastroMedico.getText(), ValorCadastroMedico.getText()};
+
+        bd.connection();
+
+        String sql = "insert into medico (CPF, Nome, CRM, Espec, Desc, Valor) values (?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement stm = bd.con.prepareStatement(sql);
+
+            stm.setString(1, coluna[0]);
+            stm.setString(2, coluna[1]);
+            stm.setString(3, coluna[2]);
+            stm.setString(4, coluna[3]);
+            stm.setString(5, coluna[4]);
+            stm.setString(6, coluna[5]);
+
+            stm.execute();
+            stm.close();
+            
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de conexão!!");
+        }
+    }//GEN-LAST:event_ButaoCadastrarUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Medico_Cadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Medico_Cadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Medico_Cadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Medico_Cadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Medico_Cadastrar().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Medico_Cadastrar().setVisible(true);
         });
     }
 
+    ConectaBanco bd = new ConectaBanco();
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField AlturaCadastroMedico;
     private javax.swing.JButton ButaoCadastrarUsuario;
     private javax.swing.JButton ButaoCancelarCadastroUsuario;
     private javax.swing.JTextField CPFCadastroMedico;
-    private javax.swing.JTextField IdadeCadastroMedico;
+    private javax.swing.JTextField CRMCadastroMedico;
+    private javax.swing.JTextField DescCadastroMedico;
+    private javax.swing.JTextField EspCadastroMedico;
     private javax.swing.JTextField NomeCadastroMedico;
-    private javax.swing.JTextField PACadastroMedico;
-    private javax.swing.JTextField PesoCadastroMedico;
+    private javax.swing.JTextField ValorCadastroMedico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

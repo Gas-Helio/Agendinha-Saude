@@ -3,18 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package query.plan;
+package Servidor;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Patrick
  */
-public class Medico_Gerenciar extends javax.swing.JFrame {
+public class Paciente_Gerenciar extends javax.swing.JFrame {
 
     /**
      * Creates new form Tela5
      */
-    public Medico_Gerenciar() {
+    public Paciente_Gerenciar() {
         initComponents();
     }
 
@@ -39,7 +47,7 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Pacientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         jButton2.setText("Cadastrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -63,14 +71,14 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CPF", "Nome", "CRM"
+                "ID", "CPF", "Nome", "Idade", "Peso", "Altura"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,9 +96,10 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
             TabelaMedicos.getColumnModel().getColumn(1).setResizable(false);
             TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(100);
             TabelaMedicos.getColumnModel().getColumn(2).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(150);
+            TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(200);
             TabelaMedicos.getColumnModel().getColumn(3).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(3).setPreferredWidth(100);
+            TabelaMedicos.getColumnModel().getColumn(4).setResizable(false);
+            TabelaMedicos.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -99,15 +108,15 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(115, 115, 115)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,47 +186,54 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
         new Medico_Cadastrar().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void PreencherTabela(String SQL) throws IOException {
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Nome", "Idade", "Peso", "Altura"};
+        bd.executaSQL(SQL);
+
+        try {
+            bd.rs.first();
+        } catch (SQLException ex) {
+            Logger.getLogger(Paciente_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            do {
+                try {
+                    dados.add(new Object[]{
+                        bd.rs.getInt("cod"),
+                        bd.rs.getString("nome"),
+                        bd.rs.getString("cpf"),
+                        bd.rs.getString("estado"),
+                        bd.rs.getString("cidade"),
+                        bd.rs.getString("bairro"),
+                        bd.rs.getString("endereco"),
+                        bd.rs.getString("tell")
+                    });
+                } catch (SQLException ex) {
+                    Logger.getLogger(Paciente_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } while (bd.rs.next());
+        } catch (SQLException ex) {
+            Logger.getLogger(Paciente_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //CriarTabela();
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Medico_Gerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Medico_Gerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Medico_Gerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Medico_Gerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Medico_Gerenciar().setVisible(true);
+                new Paciente_Gerenciar().setVisible(true);
             }
         });
     }
+
+    ConectaBanco bd = new ConectaBanco();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelaMedicos;

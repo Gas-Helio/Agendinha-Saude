@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: banco
 -- ------------------------------------------------------
--- Server version	5.7.19
+-- Server version	5.7.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `consulta`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `consulta` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `CPFM` varchar(20) DEFAULT NULL,
-  `CPFP` varchar(20) DEFAULT NULL,
+  `Id_Med` int(11) DEFAULT NULL,
+  `Id_Pac` int(11) DEFAULT NULL,
   `DataC` varchar(20) DEFAULT NULL,
   `Horario` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`Id`),
-  KEY `CPFM` (`CPFM`),
-  KEY `CPFP` (`CPFP`),
-  CONSTRAINT `CPFMc` FOREIGN KEY (`CPFM`) REFERENCES `medico` (`CPF`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `CPFPc` FOREIGN KEY (`CPFP`) REFERENCES `paciente` (`CPF`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `CPFM` (`Id_Med`),
+  KEY `CPFP` (`Id_Pac`),
+  CONSTRAINT `CPFM` FOREIGN KEY (`Id_Med`) REFERENCES `medico` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `CPFP` FOREIGN KEY (`Id_Pac`) REFERENCES `paciente` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +54,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2018-12-03 10:41:00
+=======
+-- Dump completed on 2018-12-03 13:57:52
+>>>>>>> 546bf811fd641f1e2b53ef4ef187f4706dba4704
