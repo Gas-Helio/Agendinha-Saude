@@ -23,13 +23,14 @@ DROP TABLE IF EXISTS `medico`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `medico` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `CPF` varchar(20) NOT NULL,
   `Nome` varchar(20) NOT NULL,
   `CRM` varchar(20) NOT NULL,
   `Espec` varchar(45) NOT NULL,
-  `Desc` varchar(45) NOT NULL,
+  `Desc` varchar(300) NOT NULL,
   `Valor` varchar(45) NOT NULL,
-  PRIMARY KEY (`CPF`)
+  PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-03 10:47:34
+-- Dump completed on 2018-12-03 13:57:52
