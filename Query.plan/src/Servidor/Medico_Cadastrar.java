@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servidor;
 
 import java.sql.PreparedStatement;
@@ -15,11 +10,17 @@ import javax.swing.JOptionPane;
  */
 public class Medico_Cadastrar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Tela6
-     */
-    public Medico_Cadastrar() {
+    int aux;
+    String Id;
+
+    public Medico_Cadastrar(int x, String[] obj) {
+        aux = x;
+
         initComponents();
+        if (aux == 2) {
+            Id = obj[0];
+            Preencher(obj);
+        }
     }
 
     /**
@@ -213,10 +214,25 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
 
     private void ButaoCancelarCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCancelarCadastroUsuarioActionPerformed
         dispose();
+        if (aux == 1) {
+            new Medico_Gerenciar().setVisible(true);
+        }
     }//GEN-LAST:event_ButaoCancelarCadastroUsuarioActionPerformed
 
     private void ButaoCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCadastrarUsuarioActionPerformed
+        if (aux == 2) {
+            Alterar();
+        } else {
 
+            Cadastrar();
+            if (aux == 1) {
+                new Medico_Gerenciar().preencherTabela();
+            }
+        }
+        dispose();
+    }//GEN-LAST:event_ButaoCadastrarUsuarioActionPerformed
+
+    private void Cadastrar() {
         String[] coluna = {CPFCadastroMedico.getText(), NomeCadastroMedico.getText(), CRMCadastroMedico.getText(), EspCadastroMedico.getText(), DescCadastroMedico.getText(), ValorCadastroMedico.getText()};
 
         bd.connection();
@@ -232,25 +248,62 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
             stm.setString(4, coluna[3]);
             stm.setString(5, coluna[4]);
             stm.setString(6, coluna[5]);
-            System.out.println("Aq ele vai");
             stm.execute();
-            System.out.println("Já num printa");
             stm.close();
-            
+
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro de conexão!!");
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_ButaoCadastrarUsuarioActionPerformed
+    }
+
+    public void Alterar() {
+        String[] coluna = {CPFCadastroMedico.getText(), NomeCadastroMedico.getText(), CRMCadastroMedico.getText(), EspCadastroMedico.getText(), DescCadastroMedico.getText(), ValorCadastroMedico.getText()};
+
+        bd.connection();
+
+        String update = "UPDATE medico SET CPF = ?, Nome = ?, CRM = ?, Especializacao = ?, Descricao = ?, Valor = ? WHERE Id = ?";
+
+        try {
+            PreparedStatement stm = bd.con.prepareStatement(update);
+
+            stm.setString(1, coluna[0]);
+            stm.setString(2, coluna[1]);
+            stm.setString(3, coluna[2]);
+            stm.setString(4, coluna[3]);
+            stm.setString(5, coluna[4]);
+            stm.setString(6, coluna[5]);
+            stm.setInt(7, Integer.parseInt(Id));
+            stm.execute();
+            stm.close();
+
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de conexão!!");
+            ex.printStackTrace();
+        }
+    }
+
+    public void Preencher(String[] obj) {
+        ButaoCadastrarUsuario.setText("Alterar");
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alterar Médico", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        CPFCadastroMedico.setText(obj[1]);
+        NomeCadastroMedico.setText(obj[2]);
+        CRMCadastroMedico.setText(obj[3]);
+        EspCadastroMedico.setText(obj[4]);
+        DescCadastroMedico.setText(obj[5]);
+        ValorCadastroMedico.setText(obj[6]);
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Medico_Cadastrar().setVisible(true);
+            new Medico_Cadastrar(0, null).setVisible(true);
         });
     }
 
