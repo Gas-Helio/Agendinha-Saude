@@ -1,20 +1,21 @@
-package Servidor;
+package Cliente;
 
+import Servidor.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class Medico_ConfigTabel extends AbstractTableModel {
+public class Paciente_ConfigTabel extends AbstractTableModel {
 
     private ArrayList<Medico_Objeto> produtos;
     private int COL_ID = 0, COL_CPF = 1, COL_NOME = 2, COL_ESP = 3;
 
-    public Medico_ConfigTabel() {
+    public Paciente_ConfigTabel() {
         produtos = new ArrayList();
     }
 
-    public Medico_ConfigTabel(List lista) {
+    public Paciente_ConfigTabel(List lista) {
         this();
         produtos.addAll(lista);
     }
@@ -79,6 +80,12 @@ public class Medico_ConfigTabel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return true;
+    }
+
+    public void ordenarPorEspec() {
+        Collections.sort(produtos, (Medico_Objeto o1, Medico_Objeto o2) -> o1.getEsp().compareTo(o2.getEsp()));
+
+        fireTableDataChanged();
     }
 
     public void inserir(Medico_Objeto p) {

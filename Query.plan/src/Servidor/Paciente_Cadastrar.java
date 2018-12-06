@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Cliente;
+package Servidor;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,11 +11,18 @@ import java.util.logging.Logger;
 public class Paciente_Cadastrar extends javax.swing.JFrame {
 
     int aux;
-    
-    public Paciente_Cadastrar(int x) {
+    String Id;
+
+    public Paciente_Cadastrar(int x, String[] obj) {
         aux = x;
+
         initComponents();
+        if (aux == 2) {
+            Id = obj[0];
+            Preencher(obj);
+        }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -196,28 +198,120 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButaoCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCadastrarUsuarioActionPerformed
-        String msg = CPFCadastroUsuario.getText() + ";" + NomeCadastroUsuario.getText() + ";" + IdadeCadastroUsuario.getText() + ";" + PesoCadastroUsuario.getText() + ";" + AlturaCadastroUsuario.getText() + ";" + LoginCadastroUsuario.getText() + ";" + SenhaCadastroUsuario.getText();
-        try {
-            new Conectar().salvar(msg, "Paciente");
-        } catch (IOException ex) {
-            Logger.getLogger(Paciente_Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
+        if (aux == 2) {
+            Alterar();
+            new Paciente_Gerenciar().preencherTabela();
+        } else {
+            Cadastrar();
+            if (aux == 1) {
+                new Paciente_Gerenciar().preencherTabela();
+            }
         }
         dispose();
     }//GEN-LAST:event_ButaoCadastrarUsuarioActionPerformed
 
     private void ButaoCancelarCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCancelarCadastroUsuarioActionPerformed
         dispose();
+        if (aux == 1 || aux == 2) {
+            new Paciente_Gerenciar().setVisible(true);
+        }
     }//GEN-LAST:event_ButaoCancelarCadastroUsuarioActionPerformed
+
+    public void Preencher(String[] obj) {
+        ButaoCadastrarUsuario.setText("Alterar");
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alterar Paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        CPFCadastroUsuario.setText(obj[1]);
+        NomeCadastroUsuario.setText(obj[2]);
+        IdadeCadastroUsuario.setText(obj[3]);
+        PesoCadastroUsuario.setText(obj[4]);
+        AlturaCadastroUsuario.setText(obj[5]);
+        LoginCadastroUsuario.setText(obj[6]);
+        SenhaCadastroUsuario.setText(obj[7]);
+    }
+
+    private void Cadastrar() {
+        String[] coluna = {
+            CPFCadastroUsuario.getText(),
+            NomeCadastroUsuario.getText(),
+            IdadeCadastroUsuario.getText(),
+            PesoCadastroUsuario.getText(),
+            AlturaCadastroUsuario.getText(),
+            LoginCadastroUsuario.getText(),
+            SenhaCadastroUsuario.getText()
+        };
+        
+        bd.connection();
+
+        String sql = "insert into paciente (CPF, Nome, Idade, Peso, Altura, Login, Senha) values (?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement stm = bd.con.prepareStatement(sql);
+
+            stm.setString(1, coluna[0]);
+            stm.setString(2, coluna[1]);
+            stm.setString(3, coluna[2]);
+            stm.setString(4, coluna[3]);
+            stm.setString(5, coluna[4]);
+            stm.setString(6, coluna[5]);
+            stm.setString(7, coluna[6]);
+            stm.execute();
+            stm.close();
+
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de conexão!!");
+            ex.printStackTrace();
+        }
+    }
+
+    public void Alterar() {
+        String[] coluna = {
+            CPFCadastroUsuario.getText(),
+            NomeCadastroUsuario.getText(),
+            IdadeCadastroUsuario.getText(),
+            PesoCadastroUsuario.getText(),
+            AlturaCadastroUsuario.getText(),
+            LoginCadastroUsuario.getText(),
+            SenhaCadastroUsuario.getText()
+        };
+
+        bd.connection();
+
+        String update = "UPDATE paciente SET CPF = ?, Nome = ?, Idade = ?, Peso = ?, Altura = ?, Login = ?, Senha = ? WHERE Id = ?";
+
+        try {
+            PreparedStatement stm = bd.con.prepareStatement(update);
+
+            stm.setString(1, coluna[0]);
+            stm.setString(2, coluna[1]);
+            stm.setString(3, coluna[2]);
+            stm.setString(4, coluna[3]);
+            stm.setString(5, coluna[4]);
+            stm.setString(6, coluna[5]);
+            stm.setString(7, coluna[6]);
+            stm.setInt(8, Integer.parseInt(Id));
+            stm.execute();
+            stm.close();
+
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de conexão!!");
+            ex.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Paciente_Cadastrar(0).setVisible(true);
+            new Paciente_Cadastrar(0, null).setVisible(true);
         });
     }
 
+    ConectaBanco bd = new ConectaBanco();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AlturaCadastroUsuario;
     private javax.swing.JButton ButaoCadastrarUsuario;

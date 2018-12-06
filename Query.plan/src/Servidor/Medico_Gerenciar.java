@@ -204,12 +204,13 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
 
                 new Medico_Cadastrar(2, obj).setVisible(true);
                 preencherTabela();
+                dispose();
             } catch (SQLException e) {
                 Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, e);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!!");
         }
-
-        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -218,10 +219,10 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int op = JOptionPane.showConfirmDialog(this, "Deseja excluir esse componente?");
-        if (op == 0) {
-            int selecionados = TabelaMedicos.getSelectedRow();
-            if (selecionados > 0) {
+        int selecionados = TabelaMedicos.getSelectedRow();
+        if (selecionados > 0) {
+            int op = JOptionPane.showConfirmDialog(this, "Deseja excluir esse componente?");
+            if (op == 0) {
                 int cod = modeloTable.getCod(selecionados);
                 ArrayList<Medico_Objeto> bean = new ArrayList<>();
                 selecionados = TabelaMedicos.convertRowIndexToModel(selecionados);
@@ -232,6 +233,8 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
                     dados = modeloTable.excluir(p);
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

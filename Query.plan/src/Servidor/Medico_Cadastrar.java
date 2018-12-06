@@ -214,7 +214,7 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
 
     private void ButaoCancelarCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCancelarCadastroUsuarioActionPerformed
         dispose();
-        if (aux == 1) {
+        if (aux == 1 || aux == 2) {
             new Medico_Gerenciar().setVisible(true);
         }
     }//GEN-LAST:event_ButaoCancelarCadastroUsuarioActionPerformed
@@ -222,8 +222,8 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
     private void ButaoCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCadastrarUsuarioActionPerformed
         if (aux == 2) {
             Alterar();
+            new Medico_Gerenciar().preencherTabela();
         } else {
-
             Cadastrar();
             if (aux == 1) {
                 new Medico_Gerenciar().preencherTabela();

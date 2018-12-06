@@ -6,6 +6,10 @@
 
 package Servidor;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Patrick
@@ -139,7 +143,11 @@ public class Servidor_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new Paciente_Gerenciar().setVisible(true);
+        try {
+            new Paciente_Gerenciar().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

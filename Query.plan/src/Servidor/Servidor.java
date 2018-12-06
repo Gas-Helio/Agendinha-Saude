@@ -3,15 +3,21 @@ package Servidor;
 import java.io.*;
 import java.net.*;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Servidor extends Thread {
 
     ConectaBanco bd = new ConectaBanco();
+    ArrayList<Paciente_Objeto> pac = new ArrayList();
+    Paciente_Objeto paci = new Paciente_Objeto();
 
-    public Servidor(Socket c) throws IOException {
+    public Servidor(Socket c) throws IOException, SQLException {
         String salvar;
 
         System.out.println("\nNova conexão com o cliente " + c.getInetAddress().getHostAddress());
@@ -33,11 +39,23 @@ public class Servidor extends Thread {
                 }
             }
 
+            if ("Alterar".equals(msg[0])) {
+                if ("Paciente".equals(msg[2])) {
+                    SalvarPaciente(msg[1]);
+                }
+                if ("Consulta".equals(msg[2])) {
+                    SalvarConsulta(msg[1]);
+                }
+            }
+
             if ("Recuperar".equals(msg[0])) {
-                PrintStream ps = new PrintStream(c.getOutputStream());
-                String envia = Pegar(msg[1], msg[2]);
-                ps.println(envia);
-                System.out.println("A resposta foi enviado Cliente!\n" + envia);
+                if ("Paciente".equals(msg[2])) {
+                    RecuperarPaciente(c);
+                }
+                if ("Consulta".equals(msg[2])) {
+                    SalvarConsulta(msg[1]);
+                }
+                System.out.println("A resposta foi enviado Cliente!\n");
             }
         }
     }
@@ -91,12 +109,76 @@ public class Servidor extends Thread {
         }
     }
 
+    public void AlterarPaciente(String up) {
+        String[] coluna = up.split(";");
+
+        bd.connection();
+
+        String update = "UPDATE paciente SET CPF = ?, Nome = ?, Idade = ?, Peso = ?, Altura = ?, Login = ?, Senha = ? WHERE Id = ?";
+
+        try {
+            PreparedStatement stm = bd.con.prepareStatement(update);
+
+            stm.setString(1, coluna[1]);
+            stm.setString(2, coluna[2]);
+            stm.setString(3, coluna[3]);
+            stm.setString(4, coluna[4]);
+            stm.setString(5, coluna[5]);
+            stm.setString(6, coluna[6]);
+            stm.setString(7, coluna[7]);
+            stm.setInt(8, Integer.parseInt(coluna[0]));
+            stm.execute();
+            stm.close();
+
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de conexão!!");
+            ex.printStackTrace();
+        }
+    }
+
+    public void RecuperarPaciente(Socket c) throws IOException, SQLException {
+        int recebe = 0;
+        PreparedStatement ps = bd.con.prepareStatement("SELECT count(*) as cont FROM paciente");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            recebe = rs.getInt("cont");
+        }
+        rs.close();
+        ps.close();
+
+        PrintWriter out = new PrintWriter(c.getOutputStream());
+        out.println(recebe);
+
+        bd.executaSQL("select * from paciente");
+
+        try {
+            bd.rs.first();
+
+            do {
+                out = new PrintWriter(c.getOutputStream());
+                out.println(bd.rs.getInt("Id") + ";"
+                        + bd.rs.getString("CPF") + ";"
+                        + bd.rs.getString("Nome") + ";"
+                        + bd.rs.getString("Idade") + ";"
+                        + bd.rs.getString("Peso") + ";"
+                        + bd.rs.getString("Altura") + ";"
+                        + bd.rs.getString("Login") + ";"
+                        + bd.rs.getString("Senha"));
+
+            } while (bd.rs.next());
+        } catch (SQLException ex) {
+            Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void SalvarConsulta(String salvar) throws IOException {
         String[] coluna = salvar.split(";");
 
         bd.connection();
 
-        String sql = "insert into consultas (id, CPFM, CPFP, DataC, Horario) values (?, ?, ?, ?, ?)";
+        String sql = "insert into consultas (CPFM, CPFP, DataC, Horario) values (?, ?, ?, ?)";
 
         try {
             PreparedStatement stm = bd.con.prepareStatement(sql);
@@ -105,7 +187,6 @@ public class Servidor extends Thread {
             stm.setString(1, coluna[1]);
             stm.setString(2, coluna[2]);
             stm.setString(3, coluna[3]);
-            stm.setString(4, coluna[4]);
 
             stm.execute();
             stm.close();
@@ -115,14 +196,16 @@ public class Servidor extends Thread {
         }
     }
 
-//    public static void main(String[] args) throws IOException {
-//        ServerSocket servidor = new ServerSocket(12345);
-//        System.out.println("Porta 12345 aberta!");
-//
-//        while (true) {
-//            Servidor handler = new Servidor(servidor.accept());
-//            Thread t = new Thread(handler);
-//            t.start();
-//        }
-//    }
+    public static ServerSocket servidor;
+
+    public static void main(String[] args) throws IOException, SQLException {
+        servidor = new ServerSocket(12345);
+        System.out.println("Porta 12345 aberta!");
+
+        while (true) {
+            Servidor handler = new Servidor(servidor.accept());
+            Thread t = new Thread(handler);
+            t.start();
+        }
+    }
 }

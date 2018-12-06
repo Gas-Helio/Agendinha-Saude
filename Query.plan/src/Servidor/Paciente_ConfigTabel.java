@@ -5,16 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class Medico_ConfigTabel extends AbstractTableModel {
+public class Paciente_ConfigTabel extends AbstractTableModel {
 
-    private ArrayList<Medico_Objeto> produtos;
-    private int COL_ID = 0, COL_CPF = 1, COL_NOME = 2, COL_ESP = 3;
+    private ArrayList<Paciente_Objeto> produtos;
+    private int COL_ID = 0, COL_CPF = 1, COL_NOME = 2, COL_IDADE = 3, COL_PESO = 4, COL_ALTURA = 5;
 
-    public Medico_ConfigTabel() {
+    public Paciente_ConfigTabel() {
         produtos = new ArrayList();
     }
 
-    public Medico_ConfigTabel(List lista) {
+    public Paciente_ConfigTabel(List lista) {
         this();
         produtos.addAll(lista);
     }
@@ -24,7 +24,7 @@ public class Medico_ConfigTabel extends AbstractTableModel {
     }
 
     public int getColumnCount() {
-        return 4;
+        return 6;
     }
 
     @Override
@@ -35,8 +35,12 @@ public class Medico_ConfigTabel extends AbstractTableModel {
             return "CPF";
         } else if (column == COL_NOME) {
             return "NOME";
-        } else if (column == COL_ESP) {
-            return "ESPECIALIDADE";
+        } else if (column == COL_IDADE) {
+            return "IDADE";
+        } else if (column == COL_PESO) {
+            return "PESO";
+        } else if (column == COL_ALTURA) {
+            return "ALTURA";
         }
         return "";
     }
@@ -49,14 +53,18 @@ public class Medico_ConfigTabel extends AbstractTableModel {
             return String.class;
         } else if (columnIndex == COL_NOME) {
             return String.class;
-        } else if (columnIndex == COL_ESP) {
+        } else if (columnIndex == COL_IDADE) {
+            return String.class;
+        } else if (columnIndex == COL_PESO) {
+            return String.class;
+        } else if (columnIndex == COL_ALTURA) {
             return String.class;
         }
         return String.class;
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Medico_Objeto p = produtos.get(rowIndex);
+        Paciente_Objeto p = produtos.get(rowIndex);
 
         if (columnIndex == COL_ID) {
             return p.getID();
@@ -64,14 +72,19 @@ public class Medico_ConfigTabel extends AbstractTableModel {
             return p.getCPF();
         } else if (columnIndex == COL_NOME) {
             return p.getNome();
-        } else if (columnIndex == COL_ESP) {
-            return p.getEsp();
+        } else if (columnIndex == COL_IDADE) {
+            return p.getIdade();
+        } else if (columnIndex == COL_PESO) {
+            return p.getPeso();
+        } else if (columnIndex == COL_ALTURA) {
+            return p.getAltura();
         }
+        
         return "";
     }
 
     public int getCod(int rowIndex) {
-        Medico_Objeto p = produtos.get(rowIndex);
+        Paciente_Objeto p = produtos.get(rowIndex);
 
         return p.getID();
     }
@@ -81,7 +94,7 @@ public class Medico_ConfigTabel extends AbstractTableModel {
         return true;
     }
 
-    public void inserir(Medico_Objeto p) {
+    public void inserir(Paciente_Objeto p) {
         produtos.add(p);
 
         fireTableDataChanged();
@@ -96,7 +109,7 @@ public class Medico_ConfigTabel extends AbstractTableModel {
         return produtos;
     }
 
-    public ArrayList excluir(Medico_Objeto p) {
+    public ArrayList excluir(Paciente_Objeto p) {
         produtos.remove(p);
 
         fireTableDataChanged();
@@ -104,7 +117,7 @@ public class Medico_ConfigTabel extends AbstractTableModel {
         return produtos;
     }
 
-    public Medico_Objeto getComponentes(int pos) {
+    public Paciente_Objeto getComponentes(int pos) {
         if (pos < 0 || pos >= produtos.size()) {
             return null;
         }
