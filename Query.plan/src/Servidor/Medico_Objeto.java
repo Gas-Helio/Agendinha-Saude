@@ -80,7 +80,5 @@ public class Medico_Objeto {
     public void setValor(String Valor) {
         this.Valor = Valor;
     }
-    
-    
 
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servidor;
 
 import java.sql.PreparedStatement;
@@ -19,11 +14,8 @@ import javax.swing.ListSelectionModel;
  */
 public class Medico_Gerenciar extends javax.swing.JFrame {
 
-    ConectaBanco bd = new ConectaBanco();
+    
 
-    /**
-     * Creates new form Tela5
-     */
     public Medico_Gerenciar() {
         initComponents();
         bd.connection();
@@ -305,13 +297,12 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Medico_Gerenciar().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Medico_Gerenciar().setVisible(true);
         });
     }
 
+    ConectaBanco bd = new ConectaBanco();
     ArrayList<Medico_Objeto> dados;
     Medico_Objeto medico;
     static Medico_ConfigTabel modeloTable;

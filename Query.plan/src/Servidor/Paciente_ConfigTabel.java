@@ -1,7 +1,6 @@
 package Servidor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -19,10 +18,12 @@ public class Paciente_ConfigTabel extends AbstractTableModel {
         produtos.addAll(lista);
     }
 
+    @Override
     public int getRowCount() {
         return produtos.size();
     }
 
+    @Override
     public int getColumnCount() {
         return 6;
     }
@@ -63,6 +64,7 @@ public class Paciente_ConfigTabel extends AbstractTableModel {
         return String.class;
     }
 
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Paciente_Objeto p = produtos.get(rowIndex);
 
@@ -79,7 +81,7 @@ public class Paciente_ConfigTabel extends AbstractTableModel {
         } else if (columnIndex == COL_ALTURA) {
             return p.getAltura();
         }
-        
+
         return "";
     }
 

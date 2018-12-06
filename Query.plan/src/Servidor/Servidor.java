@@ -198,14 +198,14 @@ public class Servidor extends Thread {
 
     public static ServerSocket servidor;
 
-    public static void main(String[] args) throws IOException, SQLException {
-        servidor = new ServerSocket(12345);
-        System.out.println("Porta 12345 aberta!");
-
-        while (true) {
-            Servidor handler = new Servidor(servidor.accept());
-            Thread t = new Thread(handler);
-            t.start();
-        }
-    }
+//    public static void main(String[] args) throws IOException, SQLException {
+//        servidor = new ServerSocket(12345);
+//        System.out.println("Porta 12345 aberta!");
+//
+//        while (true) {
+//            Servidor handler = new Servidor(servidor.accept());
+//            Thread t = new Thread(handler);
+//            t.start();
+//        }
+//    }
 }

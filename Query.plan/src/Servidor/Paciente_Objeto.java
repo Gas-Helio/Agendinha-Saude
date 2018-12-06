@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * @author raahp
  */
 public class Paciente_Objeto {
+
     int id;
     String CPF, Nome, Idade, Peso, Altura, Login, Senha;
     ArrayList<Paciente_Objeto> pac;
@@ -21,10 +22,10 @@ public class Paciente_Objeto {
         this.Login = Login;
         this.Senha = Senha;
     }
-    
+
     public Paciente_Objeto() {
     }
-    
+
     public int getID() {
         return id;
     }
@@ -88,6 +89,4 @@ public class Paciente_Objeto {
     public void setSenha(String Senha) {
         this.Senha = Senha;
     }
-    
-    
 }

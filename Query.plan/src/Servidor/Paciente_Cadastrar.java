@@ -239,7 +239,7 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
             LoginCadastroUsuario.getText(),
             SenhaCadastroUsuario.getText()
         };
-        
+
         bd.connection();
 
         String sql = "insert into paciente (CPF, Nome, Idade, Peso, Altura, Login, Senha) values (?, ?, ?, ?, ?, ?, ?)";
@@ -302,9 +302,6 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new Paciente_Cadastrar(0, null).setVisible(true);

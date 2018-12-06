@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Servidor;
-
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -16,10 +6,10 @@ import java.util.logging.Logger;
  */
 public class Servidor_Menu extends javax.swing.JFrame {
 
-    /** Creates new form Tela10 */
     public Servidor_Menu() {
         initComponents();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -143,16 +133,9 @@ public class Servidor_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            new Paciente_Gerenciar().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(Servidor_Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Paciente_Gerenciar().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new Servidor_Menu().setVisible(true);
