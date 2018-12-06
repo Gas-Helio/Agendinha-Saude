@@ -32,6 +32,17 @@ public class Conectar {
             }
         }
     }
+    
+    public void excluir(String msg, String tipo) throws IOException {
+        try (Socket c = this.criarsock()) {
+
+            try (PrintStream saida = new PrintStream(c.getOutputStream())) {
+                String novo = "Excluir#" + msg + "#" + tipo;
+                saida.println(novo);
+                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+            }
+        }
+    }
 
     public ArrayList<Paciente_Objeto> RecebendoPacientes(String msg) throws IOException {
         try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
@@ -49,7 +60,7 @@ public class Conectar {
                 Med.add(new Paciente_Objeto(Integer.parseInt(coluna[0]), coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6], coluna[7]));
             }
         }
-        return Med;
+        return Pac;
     }
 
     public ArrayList RecebendoMedicos(String msg) throws IOException {

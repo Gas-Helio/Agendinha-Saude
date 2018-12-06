@@ -116,15 +116,15 @@
                           </Group>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="Senha1" max="32767" attributes="0"/>
-                              <Component id="Login1" max="32767" attributes="0"/>
+                              <Component id="Senha" max="32767" attributes="0"/>
+                              <Component id="Login" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="Entrar2" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="Entrar" min="-2" pref="85" max="-2" attributes="0"/>
                           <EmptySpace pref="116" max="32767" attributes="0"/>
-                          <Component id="Entrar3" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="NaoTenho" min="-2" pref="122" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -137,17 +137,17 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Login1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Login" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <Component id="Senha1" min="-2" max="-2" attributes="0"/>
+                      <Component id="Senha" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Entrar3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Entrar2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="NaoTenho" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Entrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
@@ -160,24 +160,30 @@
             <Property name="text" type="java.lang.String" value="Login: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Login1">
+        <Component class="javax.swing.JTextField" name="Login">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Senha:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="Senha1">
+        <Component class="javax.swing.JPasswordField" name="Senha">
         </Component>
-        <Component class="javax.swing.JButton" name="Entrar2">
+        <Component class="javax.swing.JButton" name="Entrar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Entrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EntrarActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Entrar3">
+        <Component class="javax.swing.JButton" name="NaoTenho">
           <Properties>
             <Property name="text" type="java.lang.String" value="N&#xe3;o tenho conta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NaoTenhoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

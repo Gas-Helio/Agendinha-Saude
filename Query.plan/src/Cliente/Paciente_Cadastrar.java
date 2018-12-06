@@ -17,8 +17,7 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
 
     int aux;
     
-    public Paciente_Cadastrar(int x) {
-        aux = x;
+    public Paciente_Cadastrar() {
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -202,6 +201,7 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Paciente_Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        new Paciente_Menu(CPFCadastroUsuario.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_ButaoCadastrarUsuarioActionPerformed
 
@@ -214,7 +214,7 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Paciente_Cadastrar(0).setVisible(true);
+            new Paciente_Cadastrar().setVisible(true);
         });
     }
 

@@ -57,6 +57,15 @@ public class Servidor extends Thread {
                 }
                 System.out.println("A resposta foi enviado Cliente!\n");
             }
+            
+            if ("Excluir".equals(msg[0])) {
+                if ("Paciente".equals(msg[2])) {
+                    ExcluirPaciente(msg[1]);
+                }
+                if ("Consulta".equals(msg[2])) {
+                    SalvarConsulta(msg[1]);
+                }
+            }
         }
     }
 
@@ -168,6 +177,20 @@ public class Servidor extends Thread {
                         + bd.rs.getString("Senha"));
 
             } while (bd.rs.next());
+        } catch (SQLException ex) {
+            Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void ExcluirPaciente(String cod) {
+        bd.connection();
+
+        String sql = "DELETE FROM paciente WHERE CPF = '" + cod + "'";
+
+        try {
+            PreparedStatement stm = bd.con.prepareStatement(sql);
+            stm.execute();
+            stm.close();
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }

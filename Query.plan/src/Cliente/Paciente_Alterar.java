@@ -95,14 +95,6 @@ public class Paciente_Alterar extends javax.swing.JFrame {
 
         jLabel1.setText("CPF:");
 
-        jTextField3.setEditable(false);
-
-        jTextField4.setEditable(false);
-
-        jTextField5.setEditable(false);
-
-        jTextField6.setEditable(false);
-
         jLabel2.setText("Nome:");
 
         jLabel4.setText("Nascimento:");
@@ -112,8 +104,6 @@ public class Paciente_Alterar extends javax.swing.JFrame {
         jLabel3.setText("Login:");
 
         jLabel7.setText("Senha:");
-
-        jTextField7.setEditable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
