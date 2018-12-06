@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Medico_Cadastrar extends javax.swing.JFrame {
 
+    ConectaBanco bd = new ConectaBanco();
     /**
      * Creates new form Tela6
      */
@@ -253,7 +254,7 @@ public class Medico_Cadastrar extends javax.swing.JFrame {
         });
     }
 
-    ConectaBanco bd = new ConectaBanco();
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButaoCadastrarUsuario;

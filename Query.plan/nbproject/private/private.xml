@@ -2,12 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/D:/Documents/GitHub/AgendinhaGO/Query.plan/src/query/plan/Tela1.java</file>
+            <file>file:/C:/Users/Patrick/Documents/git/AgendinhaGO/Query.plan/src/Servidor/Servidor.java</file>
+            <file>file:/C:/Users/Patrick/Documents/git/AgendinhaGO/Query.plan/src/Cliente/Conectar.java</file>
+            <file>file:/C:/Users/Patrick/Documents/git/AgendinhaGO/Query.plan/src/Servidor/Medico_Cadastrar.java</file>
+            <file>file:/C:/Users/Patrick/Documents/git/AgendinhaGO/Query.plan/src/Servidor/ConectaBanco.java</file>
+            <file>file:/C:/Users/Patrick/Documents/git/AgendinhaGO/Query.plan/src/Cliente/Paciente_Cadastrar.java</file>
         </group>
-=======
-        <group/>
->>>>>>> a54206f129242e86c3e60a57114e4868a31b3f26
     </open-files>
 </project-private>
