@@ -2,9 +2,10 @@ package Servidor;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.sql.SQLException;
 
 public class Servidor_Master {
-    public Servidor_Master() throws IOException{
+    public Servidor_Master() throws IOException, SQLException{
         
         new Servidor_Menu().setVisible(true);
         
@@ -18,7 +19,7 @@ public class Servidor_Master {
         }
     }
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         new Servidor_Master();
     }
 }

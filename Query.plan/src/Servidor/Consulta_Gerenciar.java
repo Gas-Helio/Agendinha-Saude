@@ -12,11 +12,9 @@ import javax.swing.ListSelectionModel;
  *
  * @author Patrick
  */
-public class Medico_Gerenciar extends javax.swing.JFrame {
+public class Consulta_Gerenciar extends javax.swing.JFrame {
 
-    
-
-    public Medico_Gerenciar() {
+    public Consulta_Gerenciar() {
         initComponents();
         bd.connection();
         preencherTabela();
@@ -27,54 +25,54 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        CadastrarConsulta = new javax.swing.JButton();
+        AlterarConsulta = new javax.swing.JButton();
+        ExcluirConsulta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaMedicos = new javax.swing.JTable();
+        TabelaConsulta = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Consultas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
-        jButton2.setText("Cadastrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        CadastrarConsulta.setText("Cadastrar");
+        CadastrarConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                CadastrarConsultaActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Alterar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        AlterarConsulta.setText("Alterar");
+        AlterarConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                AlterarConsultaActionPerformed(evt);
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash.png"))); // NOI18N
-        jButton1.setText("Excluir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ExcluirConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash.png"))); // NOI18N
+        ExcluirConsulta.setText("Excluir");
+        ExcluirConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ExcluirConsultaActionPerformed(evt);
             }
         });
 
-        TabelaMedicos.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "CPF", "Nome", "Especialidade"
+                "ID", "Médico", "Paciente", "Data", "Horário"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -85,16 +83,16 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TabelaMedicos);
-        if (TabelaMedicos.getColumnModel().getColumnCount() > 0) {
-            TabelaMedicos.getColumnModel().getColumn(0).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(0).setPreferredWidth(1);
-            TabelaMedicos.getColumnModel().getColumn(1).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(100);
-            TabelaMedicos.getColumnModel().getColumn(2).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(150);
-            TabelaMedicos.getColumnModel().getColumn(3).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jScrollPane1.setViewportView(TabelaConsulta);
+        if (TabelaConsulta.getColumnModel().getColumnCount() > 0) {
+            TabelaConsulta.getColumnModel().getColumn(0).setResizable(false);
+            TabelaConsulta.getColumnModel().getColumn(0).setPreferredWidth(1);
+            TabelaConsulta.getColumnModel().getColumn(1).setResizable(false);
+            TabelaConsulta.getColumnModel().getColumn(1).setPreferredWidth(200);
+            TabelaConsulta.getColumnModel().getColumn(2).setResizable(false);
+            TabelaConsulta.getColumnModel().getColumn(2).setPreferredWidth(200);
+            TabelaConsulta.getColumnModel().getColumn(3).setResizable(false);
+            TabelaConsulta.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -103,15 +101,15 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(CadastrarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addComponent(AlterarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115)
+                        .addComponent(ExcluirConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,9 +118,9 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1))
+                    .addComponent(CadastrarConsulta)
+                    .addComponent(AlterarConsulta)
+                    .addComponent(ExcluirConsulta))
                 .addContainerGap())
         );
 
@@ -173,28 +171,26 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int selecionados = TabelaMedicos.getSelectedRow();
+    private void AlterarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarConsultaActionPerformed
+        int selecionados = TabelaConsulta.getSelectedRow();
         if (selecionados >= 0) {
             int cod = modeloTable.getCod(selecionados);
 
             bd.connection();
-            bd.executaSQL("SELECT * FROM medico WHERE Id = '" + cod + "'");
+            bd.executaSQL("SELECT * FROM consulta WHERE Id = '" + cod + "'");
 
             try {
                 bd.rs.first();
 
                 String[] obj = new String[]{
                     Integer.toString(bd.rs.getInt("Id")),
-                    bd.rs.getString("CPF"),
-                    bd.rs.getString("Nome"),
-                    bd.rs.getString("CRM"),
-                    bd.rs.getString("Especializacao"),
-                    bd.rs.getString("Descricao"),
-                    bd.rs.getString("Valor")
+                    bd.rs.getString("Id_Med"),
+                    bd.rs.getString("Id_Pac"),
+                    bd.rs.getString("DataC"),
+                    bd.rs.getString("Horario")
                 };
 
-                new Medico_Cadastrar(2, obj).setVisible(true);
+                new Consulta_Agendar(2, obj).setVisible(true);
                 preencherTabela();
                 dispose();
             } catch (SQLException e) {
@@ -203,37 +199,37 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha!!");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_AlterarConsultaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new Medico_Cadastrar(1, null).setVisible(true);
+    private void CadastrarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarConsultaActionPerformed
+        new Consulta_Agendar(1, null).setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_CadastrarConsultaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int selecionados = TabelaMedicos.getSelectedRow();
+    private void ExcluirConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirConsultaActionPerformed
+        int selecionados = TabelaConsulta.getSelectedRow();
         if (selecionados >= 0) {
             int op = JOptionPane.showConfirmDialog(this, "Deseja excluir esse componente?");
             if (op == 0) {
                 int cod = modeloTable.getCod(selecionados);
-                ArrayList<Medico_Objeto> bean = new ArrayList<>();
-                selecionados = TabelaMedicos.convertRowIndexToModel(selecionados);
+                ArrayList<Consulta_Objeto> bean = new ArrayList();
+                selecionados = TabelaConsulta.convertRowIndexToModel(selecionados);
                 bean.add(modeloTable.getComponentes(selecionados));
                 deleta(cod);
 
-                for (Medico_Objeto p : bean) {
+                for (Consulta_Objeto p : bean) {
                     dados = modeloTable.excluir(p);
                 }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha!!");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ExcluirConsultaActionPerformed
 
     public void deleta(int cod) {
         bd.connection();
 
-        String sql = "DELETE FROM medico WHERE Id = '" + cod + "'";
+        String sql = "DELETE FROM consulta WHERE Id = '" + cod + "'";
 
         try {
             PreparedStatement stm = bd.con.prepareStatement(sql);
@@ -246,7 +242,7 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
 
     public void preencherTabela() {
         dados = new ArrayList();
-        bd.executaSQL("select * from medico");
+        bd.executaSQL("select * from consulta");
 
         try {
             bd.rs.first();
@@ -255,13 +251,14 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
         }
         try {
             do {
-                medico = new Medico_Objeto();
+                consulta = new Consulta_Objeto();
                 try {
-                    medico.setID(bd.rs.getInt("Id"));
-                    medico.setCPF(bd.rs.getString("CPF"));
-                    medico.setNome(bd.rs.getString("Nome"));
-                    medico.setEsp(bd.rs.getString("Especializacao"));
-                    dados.add(medico);
+                    consulta.setID(bd.rs.getInt("Id"));
+                    consulta.setNMed(bd.rs.getString("Id_Med"));
+                    consulta.setNPac(bd.rs.getString("Id_Pac"));
+                    consulta.setData(bd.rs.getString("DataC"));
+                    consulta.setHora(bd.rs.getString("Horario"));
+                    dados.add(consulta);
                 } catch (SQLException ex) {
                     Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -275,42 +272,40 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
     }
 
     public void CriarTabela() {
-        modeloTable = new Medico_ConfigTabel(dados);
+        modeloTable = new Consulta_ConfigTabel1(dados);
 
-        TabelaMedicos.setModel(modeloTable);
+        TabelaConsulta.setModel(modeloTable);
 
-        TabelaMedicos.getColumnModel().getColumn(0).setPreferredWidth(40);
-        TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(100);
-        TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(180);
-        TabelaMedicos.getColumnModel().getColumn(3).setPreferredWidth(159);
+        TabelaConsulta.getColumnModel().getColumn(0).setPreferredWidth(40);
+        TabelaConsulta.getColumnModel().getColumn(1).setPreferredWidth(200);
+        TabelaConsulta.getColumnModel().getColumn(2).setPreferredWidth(200);
+        TabelaConsulta.getColumnModel().getColumn(3).setPreferredWidth(129);
+        TabelaConsulta.getColumnModel().getColumn(4).setPreferredWidth(129);
 
-        TabelaMedicos.getTableHeader().setReorderingAllowed(false);
-        TabelaMedicos.setAutoResizeMode(TabelaMedicos.AUTO_RESIZE_OFF);
-        TabelaMedicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TabelaConsulta.getTableHeader().setReorderingAllowed(false);
+        TabelaConsulta.setAutoResizeMode(TabelaConsulta.AUTO_RESIZE_OFF);
+        TabelaConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Medico_Gerenciar().setVisible(true);
+            new Consulta_Gerenciar().setVisible(true);
         });
     }
 
     ConectaBanco bd = new ConectaBanco();
-    ArrayList<Medico_Objeto> dados;
-    Medico_Objeto medico;
-    static Medico_ConfigTabel modeloTable;
+    ArrayList<Consulta_Objeto> dados;
+    Consulta_Objeto consulta;
+    static Consulta_ConfigTabel1 modeloTable;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelaMedicos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton AlterarConsulta;
+    private javax.swing.JButton CadastrarConsulta;
+    private javax.swing.JButton ExcluirConsulta;
+    private javax.swing.JTable TabelaConsulta;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

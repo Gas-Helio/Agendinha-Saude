@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 public class Conectar {
 
-    ArrayList Pac = new ArrayList();
+    ArrayList<Paciente_Objeto> Pac = new ArrayList();
     ArrayList Med = new ArrayList();
 
     public Conectar() throws IOException {
@@ -33,6 +33,25 @@ public class Conectar {
         }
     }
 
+    public ArrayList<Paciente_Objeto> RecebendoPacientes(String msg) throws IOException {
+        try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
+            saida.println("Recuperar# opa #Paciente");
+
+            Scanner s = new Scanner(c.getInputStream());
+            String salvar = s.nextLine();
+            int cont = Integer.parseInt(salvar);
+
+            for (int x = 0; x < cont; x++) {
+                s = new Scanner(c.getInputStream());
+                salvar = s.nextLine();
+
+                String[] coluna = salvar.split(";");
+                Med.add(new Paciente_Objeto(Integer.parseInt(coluna[0]), coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6], coluna[7]));
+            }
+        }
+        return Med;
+    }
+
     public ArrayList RecebendoMedicos(String msg) throws IOException {
         try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
             saida.println("Recuperar#" + msg + "#Medico");
@@ -41,7 +60,7 @@ public class Conectar {
 
             String[] coluna = salvar.split(";");
 
-            Pac.add(new Object[]{
+            Med.add(new Object[]{
                 coluna[0], coluna[1], coluna[3]
             });
         }
