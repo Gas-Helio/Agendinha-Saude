@@ -14,8 +14,6 @@ import javax.swing.ListSelectionModel;
  */
 public class Medico_Gerenciar extends javax.swing.JFrame {
 
-    
-
     public Medico_Gerenciar() {
         initComponents();
         bd.connection();
@@ -250,23 +248,22 @@ public class Medico_Gerenciar extends javax.swing.JFrame {
 
         try {
             bd.rs.first();
-        } catch (SQLException ex) {
-            Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            do {
-                medico = new Medico_Objeto();
-                try {
-                    medico.setID(bd.rs.getInt("Id"));
-                    medico.setCPF(bd.rs.getString("CPF"));
-                    medico.setNome(bd.rs.getString("Nome"));
-                    medico.setEsp(bd.rs.getString("Especializacao"));
-                    dados.add(medico);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
-                }
 
-            } while (bd.rs.next());
+            if (bd.rs.wasNull()) {
+                do {
+                    medico = new Medico_Objeto();
+                    try {
+                        medico.setID(bd.rs.getInt("Id"));
+                        medico.setCPF(bd.rs.getString("CPF"));
+                        medico.setNome(bd.rs.getString("Nome"));
+                        medico.setEsp(bd.rs.getString("Especializacao"));
+                        dados.add(medico);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } while (bd.rs.next());
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }

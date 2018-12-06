@@ -246,24 +246,23 @@ public class Consulta_Gerenciar extends javax.swing.JFrame {
 
         try {
             bd.rs.first();
-        } catch (SQLException ex) {
-            Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            do {
-                consulta = new Consulta_Objeto();
-                try {
-                    consulta.setID(bd.rs.getInt("Id"));
-                    consulta.setNMed(bd.rs.getString("Id_Med"));
-                    consulta.setNPac(bd.rs.getString("Id_Pac"));
-                    consulta.setData(bd.rs.getString("DataC"));
-                    consulta.setHora(bd.rs.getString("Horario"));
-                    dados.add(consulta);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if (bd.rs.wasNull()) {
+                do {
+                    consulta = new Consulta_Objeto();
+                    try {
+                        consulta.setID(bd.rs.getInt("Id"));
+                        consulta.setNMed(bd.rs.getString("Id_Med"));
+                        consulta.setNPac(bd.rs.getString("Id_Pac"));
+                        consulta.setData(bd.rs.getString("DataC"));
+                        consulta.setHora(bd.rs.getString("Horario"));
+                        dados.add(consulta);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
-            } while (bd.rs.next());
+                } while (bd.rs.next());
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }

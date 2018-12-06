@@ -249,23 +249,25 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
 
         try {
             bd.rs.first();
-            do {
-                paciente = new Paciente_Objeto();
-                try {
-                    paciente.setId(bd.rs.getInt("Id"));
-                    paciente.setCPF(bd.rs.getString("CPF"));
-                    paciente.setNome(bd.rs.getString("Nome"));
-                    paciente.setIdade(bd.rs.getString("Idade"));
-                    paciente.setPeso(bd.rs.getString("Peso"));
-                    paciente.setAltura(bd.rs.getString("Altura"));
-                    paciente.setLogin(bd.rs.getString("Login"));
-                    paciente.setSenha(bd.rs.getString("Senha"));
-                    dados.add(paciente);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if (bd.rs.wasNull()) {
+                do {
+                    paciente = new Paciente_Objeto();
+                    try {
+                        paciente.setId(bd.rs.getInt("Id"));
+                        paciente.setCPF(bd.rs.getString("CPF"));
+                        paciente.setNome(bd.rs.getString("Nome"));
+                        paciente.setIdade(bd.rs.getString("Idade"));
+                        paciente.setPeso(bd.rs.getString("Peso"));
+                        paciente.setAltura(bd.rs.getString("Altura"));
+                        paciente.setLogin(bd.rs.getString("Login"));
+                        paciente.setSenha(bd.rs.getString("Senha"));
+                        dados.add(paciente);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
-            } while (bd.rs.next());
+                } while (bd.rs.next());
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }
