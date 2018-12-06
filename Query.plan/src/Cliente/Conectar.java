@@ -1,17 +1,18 @@
 package Cliente;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Conectar {
 
-    ArrayList<Paciente_Objeto> Pac = new ArrayList();
+    Paciente_Objeto Pac;
     ArrayList Med = new ArrayList();
 
     public Conectar() throws IOException {
@@ -57,22 +58,27 @@ public class Conectar {
         }
     }
 
-    public ArrayList<Paciente_Objeto> RecebendoPacientes() throws IOException {
+    public Paciente_Objeto RecebendoPacientes(String msg) throws IOException {
         try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
-            saida.println("Recuperar# opa #Paciente");
+            saida.println("Recuperar#" + msg + "#Paciente");
 
-            BufferedReader entrada = new BufferedReader(new InputStreamReader(c.getInputStream()));
-            String linha = entrada.readLine();
+            ServerSocket ss = new ServerSocket(5001);
+            Socket s = ss.accept();
+            Scanner leitor = new Scanner(s.getInputStream());
 
-            while (linha != null) {
-                System.out.println(linha);
-                if (!(linha == null)) {
-                    System.out.println("Recebi: " + linha);
-                    String[] coluna = linha.split(";");
-                    Pac.add(new Paciente_Objeto(Integer.parseInt(coluna[0]), coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6], coluna[7]));
-                }
-                linha = entrada.readLine();
+            String linha = "";
+            System.out.println("Oia ele aq");
+            
+            while (leitor.hasNext()) {
+                linha += leitor.nextLine();
             }
+
+            System.out.println(linha);
+            String[] coluna = linha.split(";");
+
+            Pac = new Paciente_Objeto(coluna[0], coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6]);
+        } catch (IOException ex) {
+            Logger.getLogger(Conectar.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Pac;
     }

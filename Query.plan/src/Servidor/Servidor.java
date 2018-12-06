@@ -3,7 +3,6 @@ package Servidor;
 import java.io.*;
 import java.net.*;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -50,7 +49,7 @@ public class Servidor extends Thread {
 
             if ("Recuperar".equals(msg[0])) {
                 if ("Paciente".equals(msg[2])) {
-                    RecuperarPaciente(c);
+                    RecuperarPaciente(c, msg[1]);
                 }
                 if ("Consulta".equals(msg[2])) {
                     SalvarConsulta(msg[1]);
@@ -123,30 +122,43 @@ public class Servidor extends Thread {
         }
     }
 
-    public void RecuperarPaciente(Socket c) throws IOException, SQLException {
+    public void RecuperarPaciente(Socket c, String msg) throws IOException, SQLException {
+        String[] col = msg.split(";");
+        System.out.println("Login: " + col[0] + "\nSenha: " + col[1]);
         bd.connection();
         bd.executaSQL("select * from paciente");
-        
+
         try {
             bd.rs.first();
-
+            String host = "127.0.0.1";
+            Socket socket = new Socket(host, 5001);
+            PrintWriter output = new PrintWriter(socket.getOutputStream());
+            String bora = "";
+            
             do {
-                PrintWriter out = new PrintWriter(c.getOutputStream());
+                String Login = bd.rs.getString("Login");
+                String Senha = bd.rs.getString("Senha");
                 
-                String bora = bd.rs.getInt("Id") + ";"
-                        + bd.rs.getString("CPF") + ";"
-                        + bd.rs.getString("Nome") + ";"
-                        + bd.rs.getString("Idade") + ";"
-                        + bd.rs.getString("Peso") + ";"
-                        + bd.rs.getString("Altura") + ";"
-                        + bd.rs.getString("Login") + ";"
-                        + bd.rs.getString("Senha");
+                System.out.println("Primeiro: " + col[0] + "\tSegundo: " + Login);
 
-                System.out.println("Retornando: " + bora);
-                
-                out.println(bora);
+                if (Login.equals(col[0])) {
+                    bora = bd.rs.getInt("Id") + ";"
+                            + bd.rs.getString("CPF") + ";"
+                            + bd.rs.getString("Nome") + ";"
+                            + bd.rs.getString("Idade") + ";"
+                            + bd.rs.getString("Peso") + ";"
+                            + bd.rs.getString("Altura") + ";"
+                            + Login + ";"
+                            + Senha;
 
+                    System.out.println("Retornando: " + bora);
+                    break;
+                }
             } while (bd.rs.next());
+            
+            output.println(bora);
+            output.close();
+            socket.close();
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }

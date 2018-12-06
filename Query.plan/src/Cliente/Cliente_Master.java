@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
  * @author Patrick
  */
 public class Cliente_Master extends javax.swing.JFrame {
-
+    
     private int v = 0;
-
+    
     public Cliente_Master() {
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -149,21 +149,14 @@ public class Cliente_Master extends javax.swing.JFrame {
 
     private void EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntrarActionPerformed
         try {
-            paciente = new Conectar().RecebendoPacientes();
+            String senha = new String(Senha.getPassword());
+            String pass = Login.getText() + ";" + senha;
+            paciente = new Conectar().RecebendoPacientes(pass);
             
-            for(Paciente_Objeto p : paciente){
-                System.out.println(p.getLogin());
-                if(p.getLogin() == Login.getText()){
-                    String senha = new String(Senha.getPassword());
-                    System.out.println("Opa: " + senha);
-                    if(p.getSenha() == senha){
-                        new Paciente_Menu(p).setVisible(true);
-                        v++;
-                        break;
-                    }
-                }
-            }
-            if(v == 0){
+            if (paciente != null) {
+                new Paciente_Menu(paciente).setVisible(true);
+                
+            }else{
                 JOptionPane.showMessageDialog(this, "Paciente não encontrado!!");
             }
             
@@ -172,14 +165,14 @@ public class Cliente_Master extends javax.swing.JFrame {
         }
         dispose();
     }//GEN-LAST:event_EntrarActionPerformed
-
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new Cliente_Master().setVisible(true);
         });
     }
-
-    ArrayList<Paciente_Objeto> paciente = new ArrayList();
+    
+    Paciente_Objeto paciente = new Paciente_Objeto();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Entrar;
     private javax.swing.JTextField Login;
