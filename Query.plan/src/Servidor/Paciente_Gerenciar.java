@@ -174,7 +174,7 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selecionados = TabelaPacientes.getSelectedRow();
-        if (selecionados > 0) {
+        if (selecionados >= 0) {
             int cod = modeloTable.getCod(selecionados);
 
             bd.connection();
@@ -211,7 +211,7 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int selecionados = TabelaPacientes.getSelectedRow();
-        if (selecionados > 0) {
+        if (selecionados >= 0) {
             int op = JOptionPane.showConfirmDialog(this, "Deseja excluir esse componente?");
             if (op == 0) {
                 int cod = modeloTable.getCod(selecionados);
