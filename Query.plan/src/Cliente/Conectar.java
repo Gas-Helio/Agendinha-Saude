@@ -44,7 +44,7 @@ public class Conectar {
         }
     }
 
-    public ArrayList<Paciente_Objeto> RecebendoPacientes(String msg) throws IOException {
+    public ArrayList<Paciente_Objeto> RecebendoPacientes() throws IOException {
         try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
             saida.println("Recuperar# opa #Paciente");
 
