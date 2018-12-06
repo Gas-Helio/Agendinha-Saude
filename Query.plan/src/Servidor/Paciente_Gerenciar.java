@@ -249,7 +249,7 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
 
         try {
             bd.rs.first();
-            if (bd.rs.wasNull()) {
+            if (bd.rs.wasNull() == false) {
                 do {
                     paciente = new Paciente_Objeto();
                     try {
@@ -265,14 +265,14 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
                     } catch (SQLException ex) {
                         Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+                    CriarTabela();
                 } while (bd.rs.next());
+            } else {
+                CriarTabela();
             }
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        CriarTabela();
     }
 
     public void CriarTabela() {

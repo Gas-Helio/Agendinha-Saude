@@ -248,7 +248,9 @@ public class Consulta_Agendar extends javax.swing.JFrame {
         AgendarConsulta.setText("Reagendar");
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alterar Consulta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
         CPFMedico.setText(obj[1]);
+        CPFMedico.setEditable(false);
         CPFPaciente.setText(obj[2]);
+        CPFPaciente.setEditable(false);
     }
     
     public static void main(String args[]) {

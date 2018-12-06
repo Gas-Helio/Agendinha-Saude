@@ -247,27 +247,27 @@ public class Consulta_Gerenciar extends javax.swing.JFrame {
         try {
             bd.rs.first();
             if (bd.rs.wasNull()) {
+                CriarTabela();
+            } else {
                 do {
                     consulta = new Consulta_Objeto();
                     try {
                         consulta.setID(bd.rs.getInt("Id"));
-                        consulta.setNMed(bd.rs.getString("Id_Med"));
-                        consulta.setNPac(bd.rs.getString("Id_Pac"));
+                        consulta.setNMed(Integer.toString(bd.rs.getInt("Id_Med")));
+                        consulta.setNPac(Integer.toString(bd.rs.getInt("Id_Pac")));
                         consulta.setData(bd.rs.getString("DataC"));
                         consulta.setHora(bd.rs.getString("Horario"));
                         dados.add(consulta);
+                        
                     } catch (SQLException ex) {
-                        Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Consulta_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
                 } while (bd.rs.next());
+                CriarTabela();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        CriarTabela();
     }
 
     public void CriarTabela() {
