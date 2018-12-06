@@ -33,28 +33,41 @@ public class Conectar {
         }
     }
     
+    public void update(String msg, String tipo) throws IOException {
+        try (Socket c = this.criarsock()) {
+
+            try (PrintStream saida = new PrintStream(c.getOutputStream())) {
+                String novo = "Alterar#" + msg + "#" + tipo;
+                saida.println(novo);
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+            }
+        }
+    }
+    
     public void excluir(String msg, String tipo) throws IOException {
         try (Socket c = this.criarsock()) {
 
             try (PrintStream saida = new PrintStream(c.getOutputStream())) {
                 String novo = "Excluir#" + msg + "#" + tipo;
                 saida.println(novo);
-                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+                JOptionPane.showMessageDialog(null, "Excluído com sucesso");
             }
         }
     }
 
-    public ArrayList<Paciente_Objeto> RecebendoPacientes(String msg) throws IOException {
+    public ArrayList<Paciente_Objeto> RecebendoPacientes() throws IOException {
         try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
             saida.println("Recuperar# opa #Paciente");
 
             Scanner s = new Scanner(c.getInputStream());
             String salvar = s.nextLine();
+            System.out.println("Eita: " + salvar);
             int cont = Integer.parseInt(salvar);
 
             for (int x = 0; x < cont; x++) {
                 s = new Scanner(c.getInputStream());
                 salvar = s.nextLine();
+                System.out.println("Opa: " + salvar);
 
                 String[] coluna = salvar.split(";");
                 Med.add(new Paciente_Objeto(Integer.parseInt(coluna[0]), coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6], coluna[7]));

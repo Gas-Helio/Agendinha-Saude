@@ -16,10 +16,18 @@ import java.util.logging.Logger;
 public class Paciente_Cadastrar extends javax.swing.JFrame {
 
     int aux;
-    
-    public Paciente_Cadastrar() {
+    Paciente_Objeto p = new Paciente_Objeto();
+
+    public Paciente_Cadastrar(int x, Paciente_Objeto obj) {
+        aux = x;
+        p = obj;
+
         initComponents();
+        if (aux == 1) {
+            Preencher(p);
+        }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -195,13 +203,11 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButaoCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCadastrarUsuarioActionPerformed
-        String msg = CPFCadastroUsuario.getText() + ";" + NomeCadastroUsuario.getText() + ";" + IdadeCadastroUsuario.getText() + ";" + PesoCadastroUsuario.getText() + ";" + AlturaCadastroUsuario.getText() + ";" + LoginCadastroUsuario.getText() + ";" + SenhaCadastroUsuario.getText();
-        try {
-            new Conectar().salvar(msg, "Paciente");
-        } catch (IOException ex) {
-            Logger.getLogger(Paciente_Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
+        if (aux == 1) {
+            Alterar();
+        } else {
+            Cadastrar();
         }
-        new Paciente_Menu(CPFCadastroUsuario.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_ButaoCadastrarUsuarioActionPerformed
 
@@ -209,12 +215,68 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_ButaoCancelarCadastroUsuarioActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    public void Cadastrar(){
+        String msg
+                = CPFCadastroUsuario.getText() + ";"
+                + NomeCadastroUsuario.getText() + ";"
+                + IdadeCadastroUsuario.getText() + ";"
+                + PesoCadastroUsuario.getText() + ";"
+                + AlturaCadastroUsuario.getText() + ";"
+                + LoginCadastroUsuario.getText() + ";"
+                + SenhaCadastroUsuario.getText();
+
+        p = new Paciente_Objeto(
+                CPFCadastroUsuario.getText(),
+                NomeCadastroUsuario.getText(),
+                IdadeCadastroUsuario.getText(),
+                PesoCadastroUsuario.getText(),
+                AlturaCadastroUsuario.getText(),
+                LoginCadastroUsuario.getText(),
+                SenhaCadastroUsuario.getText()
+        );
+
+        try {
+            new Conectar().salvar(msg, "Paciente");
+            new Paciente_Menu(p).setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Paciente_Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void Alterar(){
+        String msg
+                = CPFCadastroUsuario.getText() + ";"
+                + NomeCadastroUsuario.getText() + ";"
+                + IdadeCadastroUsuario.getText() + ";"
+                + PesoCadastroUsuario.getText() + ";"
+                + AlturaCadastroUsuario.getText() + ";"
+                + LoginCadastroUsuario.getText() + ";"
+                + SenhaCadastroUsuario.getText();
+        
+        try {
+            new Conectar().update(msg, "Paciente");
+            new Paciente_Menu(p).setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Paciente_Cadastrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void Preencher(Paciente_Objeto obj) {
+        ButaoCadastrarUsuario.setText("Alterar");
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alterar Paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        CPFCadastroUsuario.setText(obj.getCPF());
+        CPFCadastroUsuario.setEditable(false);
+        NomeCadastroUsuario.setText(obj.getNome());
+        IdadeCadastroUsuario.setText(obj.getIdade());
+        PesoCadastroUsuario.setText(obj.getPeso());
+        AlturaCadastroUsuario.setText(obj.getAltura());
+        LoginCadastroUsuario.setText(obj.getLogin());
+        SenhaCadastroUsuario.setText(obj.getSenha());
+    }
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Paciente_Cadastrar().setVisible(true);
+            new Paciente_Cadastrar(0, null).setVisible(true);
         });
     }
 

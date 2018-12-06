@@ -41,7 +41,7 @@ public class Servidor extends Thread {
 
             if ("Alterar".equals(msg[0])) {
                 if ("Paciente".equals(msg[2])) {
-                    SalvarPaciente(msg[1]);
+                    AlterarPaciente(msg[1]);
                 }
                 if ("Consulta".equals(msg[2])) {
                     SalvarConsulta(msg[1]);
@@ -123,19 +123,18 @@ public class Servidor extends Thread {
 
         bd.connection();
 
-        String update = "UPDATE paciente SET CPF = ?, Nome = ?, Idade = ?, Peso = ?, Altura = ?, Login = ?, Senha = ? WHERE Id = ?";
+        String update = "UPDATE paciente SET Nome = ?, Idade = ?, Peso = ?, Altura = ?, Login = ?, Senha = ? WHERE CPF = ?";
 
         try {
             PreparedStatement stm = bd.con.prepareStatement(update);
 
-            stm.setString(1, coluna[1]);
-            stm.setString(2, coluna[2]);
-            stm.setString(3, coluna[3]);
-            stm.setString(4, coluna[4]);
-            stm.setString(5, coluna[5]);
-            stm.setString(6, coluna[6]);
-            stm.setString(7, coluna[7]);
-            stm.setInt(8, Integer.parseInt(coluna[0]));
+            stm.setString(2, coluna[1]);
+            stm.setString(3, coluna[2]);
+            stm.setString(4, coluna[3]);
+            stm.setString(5, coluna[4]);
+            stm.setString(6, coluna[5]);
+            stm.setString(7, coluna[6]);
+            stm.setString(0, coluna[0]);
             stm.execute();
             stm.close();
 

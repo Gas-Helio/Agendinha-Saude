@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Patrick
  */
 public class Cliente_Master extends javax.swing.JFrame {
+
+    private int v = 0;
 
     public Cliente_Master() {
         initComponents();
@@ -141,18 +144,26 @@ public class Cliente_Master extends javax.swing.JFrame {
 
     private void NaoTenhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NaoTenhoActionPerformed
         dispose();
-        new Paciente_Cadastrar().setVisible(true);
+        new Paciente_Cadastrar(1, null).setVisible(true);
     }//GEN-LAST:event_NaoTenhoActionPerformed
 
     private void EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntrarActionPerformed
         try {
             paciente = new Conectar().RecebendoPacientes();
-            int val = 0;
+            
             for(Paciente_Objeto p : paciente){
                 if(p.getLogin() == Login.getText()){
                     String senha = new String(Senha.getPassword());
-                    if(p.getSenha() == senha);
+                    System.out.println("Opa: " + senha);
+                    if(p.getSenha() == senha){
+                        new Paciente_Menu(p).setVisible(true);
+                        v++;
+                        break;
+                    }
                 }
+            }
+            if(v == 0){
+                JOptionPane.showMessageDialog(this, "Paciente não encontrado!!");
             }
             
         } catch (IOException ex) {

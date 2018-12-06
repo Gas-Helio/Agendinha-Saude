@@ -10,10 +10,10 @@ import java.util.logging.Logger;
  */
 public class Paciente_Menu extends javax.swing.JFrame {
 
-    static String ID;
+    Paciente_Objeto p = new Paciente_Objeto();
     
-    public Paciente_Menu(String Id) {
-        ID = Id;
+    public Paciente_Menu(Paciente_Objeto paciente) {
+        p = paciente;
         initComponents();
     }
     
@@ -136,12 +136,12 @@ public class Paciente_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarConsultaActionPerformed
 
     private void AlterarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarDadosActionPerformed
-        new Paciente_Alterar().setVisible(true);
+        new Paciente_Cadastrar(1, p).setVisible(true);
     }//GEN-LAST:event_AlterarDadosActionPerformed
 
     private void ExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirContaActionPerformed
         try {
-            new Conectar().excluir(ID, "Paciente");
+            new Conectar().excluir(p.getCPF(), "Paciente");
         } catch (IOException ex) {
             Logger.getLogger(Paciente_Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,7 +149,7 @@ public class Paciente_Menu extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Paciente_Menu(ID).setVisible(true);
+            new Paciente_Menu(null).setVisible(true);
         });
     }
 

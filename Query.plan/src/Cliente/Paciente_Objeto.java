@@ -11,6 +11,16 @@ public class Paciente_Objeto {
     String CPF, Nome, Idade, Peso, Altura, Login, Senha;
     ArrayList<Paciente_Objeto> pac;
 
+    public Paciente_Objeto(String CPF, String Nome, String Idade, String Peso, String Altura, String Login, String Senha) {
+        this.CPF = CPF;
+        this.Nome = Nome;
+        this.Idade = Idade;
+        this.Peso = Peso;
+        this.Altura = Altura;
+        this.Login = Login;
+        this.Senha = Senha;
+    }
+    
     public Paciente_Objeto(int id, String CPF, String Nome, String Idade, String Peso, String Altura, String Login, String Senha) {
         this.ID = id;
         this.CPF = CPF;
