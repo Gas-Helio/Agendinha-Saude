@@ -57,7 +57,7 @@ public class Servidor extends Thread {
                 }
                 System.out.println("A resposta foi enviado Cliente!\n");
             }
-            
+
             if ("Excluir".equals(msg[0])) {
                 if ("Paciente".equals(msg[2])) {
                     ExcluirPaciente(msg[1]);
@@ -67,29 +67,6 @@ public class Servidor extends Thread {
                 }
             }
         }
-    }
-
-    public String Pegar(String cod, String tip) throws FileNotFoundException, IOException {
-        String recebe = null;
-        File Arquivo = new File("Opa.txt");
-
-        FileReader reader = new FileReader(Arquivo);
-        try (BufferedReader input = new BufferedReader(reader)) {
-            String[] aux;
-
-            String linha = input.readLine();
-            while (linha != null) {
-                aux = linha.split(";");
-
-                if (aux[0].equals(cod)) {
-                    recebe = linha;
-                    break;
-                }
-
-                linha = input.readLine();
-            }
-        }
-        return recebe;
     }
 
     private void SalvarPaciente(String salvar) throws IOException {
@@ -128,13 +105,13 @@ public class Servidor extends Thread {
         try {
             PreparedStatement stm = bd.con.prepareStatement(update);
 
-            stm.setString(2, coluna[1]);
-            stm.setString(3, coluna[2]);
-            stm.setString(4, coluna[3]);
-            stm.setString(5, coluna[4]);
-            stm.setString(6, coluna[5]);
-            stm.setString(7, coluna[6]);
-            stm.setString(0, coluna[0]);
+            stm.setString(1, coluna[1]);
+            stm.setString(2, coluna[2]);
+            stm.setString(3, coluna[3]);
+            stm.setString(4, coluna[4]);
+            stm.setString(5, coluna[5]);
+            stm.setString(6, coluna[6]);
+            stm.setString(7, coluna[0]);
             stm.execute();
             stm.close();
 
@@ -147,40 +124,34 @@ public class Servidor extends Thread {
     }
 
     public void RecuperarPaciente(Socket c) throws IOException, SQLException {
-        int recebe = 0;
-        PreparedStatement ps = bd.con.prepareStatement("SELECT count(*) as cont FROM paciente");
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            recebe = rs.getInt("cont");
-        }
-        rs.close();
-        ps.close();
-
-        PrintWriter out = new PrintWriter(c.getOutputStream());
-        out.println(recebe);
-
+        bd.connection();
         bd.executaSQL("select * from paciente");
-
+        
         try {
             bd.rs.first();
 
             do {
-                out = new PrintWriter(c.getOutputStream());
-                out.println(bd.rs.getInt("Id") + ";"
+                PrintWriter out = new PrintWriter(c.getOutputStream());
+                
+                String bora = bd.rs.getInt("Id") + ";"
                         + bd.rs.getString("CPF") + ";"
                         + bd.rs.getString("Nome") + ";"
                         + bd.rs.getString("Idade") + ";"
                         + bd.rs.getString("Peso") + ";"
                         + bd.rs.getString("Altura") + ";"
                         + bd.rs.getString("Login") + ";"
-                        + bd.rs.getString("Senha"));
+                        + bd.rs.getString("Senha");
+
+                System.out.println("Retornando: " + bora);
+                
+                out.println(bora);
 
             } while (bd.rs.next());
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void ExcluirPaciente(String cod) {
         bd.connection();
 

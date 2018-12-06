@@ -152,6 +152,7 @@ public class Cliente_Master extends javax.swing.JFrame {
             paciente = new Conectar().RecebendoPacientes();
             
             for(Paciente_Objeto p : paciente){
+                System.out.println(p.getLogin());
                 if(p.getLogin() == Login.getText()){
                     String senha = new String(Senha.getPassword());
                     System.out.println("Opa: " + senha);
@@ -169,6 +170,7 @@ public class Cliente_Master extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Cliente_Master.class.getName()).log(Level.SEVERE, null, ex);
         }
+        dispose();
     }//GEN-LAST:event_EntrarActionPerformed
 
     public static void main(String args[]) {

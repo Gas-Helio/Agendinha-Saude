@@ -1,6 +1,8 @@
 package Cliente;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class Conectar {
             }
         }
     }
-    
+
     public void update(String msg, String tipo) throws IOException {
         try (Socket c = this.criarsock()) {
 
@@ -43,7 +45,7 @@ public class Conectar {
             }
         }
     }
-    
+
     public void excluir(String msg, String tipo) throws IOException {
         try (Socket c = this.criarsock()) {
 
@@ -59,18 +61,17 @@ public class Conectar {
         try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
             saida.println("Recuperar# opa #Paciente");
 
-            Scanner s = new Scanner(c.getInputStream());
-            String salvar = s.nextLine();
-            System.out.println("Eita: " + salvar);
-            int cont = Integer.parseInt(salvar);
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(c.getInputStream()));
+            String linha = entrada.readLine();
 
-            for (int x = 0; x < cont; x++) {
-                s = new Scanner(c.getInputStream());
-                salvar = s.nextLine();
-                System.out.println("Opa: " + salvar);
-
-                String[] coluna = salvar.split(";");
-                Med.add(new Paciente_Objeto(Integer.parseInt(coluna[0]), coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6], coluna[7]));
+            while (linha != null) {
+                System.out.println(linha);
+                if (!(linha == null)) {
+                    System.out.println("Recebi: " + linha);
+                    String[] coluna = linha.split(";");
+                    Pac.add(new Paciente_Objeto(Integer.parseInt(coluna[0]), coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6], coluna[7]));
+                }
+                linha = entrada.readLine();
             }
         }
         return Pac;

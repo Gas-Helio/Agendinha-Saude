@@ -142,6 +142,7 @@ public class Paciente_Menu extends javax.swing.JFrame {
     private void ExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirContaActionPerformed
         try {
             new Conectar().excluir(p.getCPF(), "Paciente");
+            dispose();
         } catch (IOException ex) {
             Logger.getLogger(Paciente_Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
