@@ -190,7 +190,7 @@ public class Consulta_Gerenciar extends javax.swing.JFrame {
                     bd.rs.getString("Horario")
                 };
 
-                new Consulta_Agendar(2, obj).setVisible(true);
+                new Consulta_Agendar(2, obj, null, null).setVisible(true);
                 preencherTabela();
                 dispose();
             } catch (SQLException e) {
@@ -202,7 +202,7 @@ public class Consulta_Gerenciar extends javax.swing.JFrame {
     }//GEN-LAST:event_AlterarConsultaActionPerformed
 
     private void CadastrarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarConsultaActionPerformed
-        new Consulta_Agendar(1, null).setVisible(true);
+        new Medico_Selecionar().setVisible(true);
         dispose();
     }//GEN-LAST:event_CadastrarConsultaActionPerformed
 

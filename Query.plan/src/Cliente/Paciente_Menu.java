@@ -3,20 +3,17 @@ package Cliente;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Patrick
- */
 public class Paciente_Menu extends javax.swing.JFrame {
 
     Paciente_Objeto p = new Paciente_Objeto();
-    
+
     public Paciente_Menu(Paciente_Objeto paciente) {
         p = paciente;
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,6 +69,11 @@ public class Paciente_Menu extends javax.swing.JFrame {
         });
 
         MinhasConsultas.setText("Minhas consultas");
+        MinhasConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MinhasConsultasActionPerformed(evt);
+            }
+        });
 
         CadastrarConsulta.setText("Cadastrar Consulta");
         CadastrarConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -132,21 +134,30 @@ public class Paciente_Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CadastrarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarConsultaActionPerformed
-        new Paciente_Medicos().setVisible(true);
+        new Paciente_Medicos(p).setVisible(true);
     }//GEN-LAST:event_CadastrarConsultaActionPerformed
 
     private void AlterarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarDadosActionPerformed
         new Paciente_Cadastrar(1, p).setVisible(true);
+        dispose();
     }//GEN-LAST:event_AlterarDadosActionPerformed
 
     private void ExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirContaActionPerformed
-        try {
-            new Conectar().excluir(p.getCPF(), "Paciente");
-            dispose();
-        } catch (IOException ex) {
-            Logger.getLogger(Paciente_Menu.class.getName()).log(Level.SEVERE, null, ex);
+        int op = JOptionPane.showConfirmDialog(this, "Deseja excluir seu cadastro?");
+        if (op == 0) {
+            try {
+                new Conectar().excluir(p.getCPF(), "Paciente");
+                new Cliente_Master().setVisible(true);
+                dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(Paciente_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_ExcluirContaActionPerformed
+
+    private void MinhasConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinhasConsultasActionPerformed
+        new Paciente_Consultas(p.getCPF()).setVisible(true);
+    }//GEN-LAST:event_MinhasConsultasActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {

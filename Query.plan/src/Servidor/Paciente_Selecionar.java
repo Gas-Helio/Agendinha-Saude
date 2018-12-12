@@ -1,22 +1,25 @@
-package Cliente;
+package Servidor;
 
-import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
-public class Paciente_Medicos extends javax.swing.JFrame {
+/**
+ *
+ * @author Patrick
+ */
+public class Paciente_Selecionar extends javax.swing.JFrame {
 
-    Medico_ConfigTabel modeloTable = new Medico_ConfigTabel();
-    Medico_Objeto Med = new Medico_Objeto();
     Paciente_Objeto Pac = new Paciente_Objeto();
-    ArrayList<Medico_Objeto> medicos = new ArrayList();
-
-    public Paciente_Medicos(Paciente_Objeto pac) {
-        Pac = pac;
+    String CPFM;
+    public Paciente_Selecionar(String cpfm) {
+        CPFM = cpfm;
         initComponents();
+        bd.connection();
         preencherTabela();
     }
 
@@ -26,44 +29,44 @@ public class Paciente_Medicos extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaMedicos = new javax.swing.JTable();
+        TabelaPacientes = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Consultar Médicos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Pacientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
-        jButton2.setText("Marcar");
+        jButton2.setText("Selecionar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Voltar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        TabelaMedicos.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CPF", "Nome", "Especialidade"
+                "ID", "CPF", "Nome", "Idade", "Peso", "Altura"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -74,14 +77,17 @@ public class Paciente_Medicos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TabelaMedicos);
-        if (TabelaMedicos.getColumnModel().getColumnCount() > 0) {
-            TabelaMedicos.getColumnModel().getColumn(0).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(0).setPreferredWidth(100);
-            TabelaMedicos.getColumnModel().getColumn(1).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(150);
-            TabelaMedicos.getColumnModel().getColumn(2).setResizable(false);
-            TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jScrollPane1.setViewportView(TabelaPacientes);
+        if (TabelaPacientes.getColumnModel().getColumnCount() > 0) {
+            TabelaPacientes.getColumnModel().getColumn(0).setResizable(false);
+            TabelaPacientes.getColumnModel().getColumn(0).setPreferredWidth(1);
+            TabelaPacientes.getColumnModel().getColumn(1).setResizable(false);
+            TabelaPacientes.getColumnModel().getColumn(1).setPreferredWidth(100);
+            TabelaPacientes.getColumnModel().getColumn(2).setResizable(false);
+            TabelaPacientes.getColumnModel().getColumn(2).setPreferredWidth(200);
+            TabelaPacientes.getColumnModel().getColumn(3).setResizable(false);
+            TabelaPacientes.getColumnModel().getColumn(4).setResizable(false);
+            TabelaPacientes.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -90,13 +96,13 @@ public class Paciente_Medicos extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +112,7 @@ public class Paciente_Medicos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -158,41 +164,67 @@ public class Paciente_Medicos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int selecionados = TabelaMedicos.getSelectedRow();
+        int selecionados = TabelaPacientes.getSelectedRow();
         if (selecionados >= 0) {
-            Med = modeloTable.getComponentes(selecionados);
-            new Consulta_Agendar(0, Pac, Med).setVisible(true);
+            Pac = modeloTable.getComponentes(selecionados);
+            new Consulta_Agendar(0, null, CPFM, Pac.getCPF()).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha!!");
         }
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void preencherTabela() {
+        dados = new ArrayList();
+        bd.executaSQL("select * from paciente");
+
         try {
-            medicos = new Conectar().RecebendoMedicos();
-        } catch (IOException ex) {
-            Logger.getLogger(Paciente_Medicos.class.getName()).log(Level.SEVERE, null, ex);
+            bd.rs.first();
+            if (bd.rs.wasNull() == false) {
+                do {
+                    paciente = new Paciente_Objeto();
+                    try {
+                        paciente.setId(bd.rs.getInt("Id"));
+                        paciente.setCPF(bd.rs.getString("CPF"));
+                        paciente.setNome(bd.rs.getString("Nome"));
+                        paciente.setIdade(bd.rs.getString("Idade"));
+                        paciente.setPeso(bd.rs.getString("Peso"));
+                        paciente.setAltura(bd.rs.getString("Altura"));
+                        paciente.setLogin(bd.rs.getString("Login"));
+                        paciente.setSenha(bd.rs.getString("Senha"));
+                        dados.add(paciente);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    CriarTabela();
+                } while (bd.rs.next());
+            } else {
+                CriarTabela();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        CriarTabela();
     }
 
     public void CriarTabela() {
-        modeloTable = new Medico_ConfigTabel(medicos);
+        modeloTable = new Paciente_ConfigTabel(dados);
 
-        TabelaMedicos.setModel(modeloTable);
+        TabelaPacientes.setModel(modeloTable);
 
-        TabelaMedicos.getColumnModel().getColumn(0).setPreferredWidth(40);
-        TabelaMedicos.getColumnModel().getColumn(1).setPreferredWidth(239);
-        TabelaMedicos.getColumnModel().getColumn(2).setPreferredWidth(200);
+        TabelaPacientes.getColumnModel().getColumn(0).setPreferredWidth(40);
+        TabelaPacientes.getColumnModel().getColumn(1).setPreferredWidth(168);
+        TabelaPacientes.getColumnModel().getColumn(2).setPreferredWidth(250);
+        TabelaPacientes.getColumnModel().getColumn(3).setPreferredWidth(80);
+        TabelaPacientes.getColumnModel().getColumn(4).setPreferredWidth(80);
+        TabelaPacientes.getColumnModel().getColumn(5).setPreferredWidth(80);
 
-        TabelaMedicos.getTableHeader().setReorderingAllowed(false);
-        TabelaMedicos.setAutoResizeMode(TabelaMedicos.AUTO_RESIZE_OFF);
-        TabelaMedicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TabelaPacientes.getTableHeader().setReorderingAllowed(false);
+        TabelaPacientes.setAutoResizeMode(TabelaPacientes.AUTO_RESIZE_OFF);
+        TabelaPacientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         setLocationRelativeTo(null);
         setResizable(false);
@@ -201,14 +233,18 @@ public class Paciente_Medicos extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Paciente_Medicos(null).setVisible(true);
+            new Paciente_Selecionar("").setVisible(true);
         });
     }
 
+    ArrayList<Paciente_Objeto> dados;
+    Paciente_Objeto paciente;
+    static Paciente_ConfigTabel modeloTable;
+    ConectaBanco bd = new ConectaBanco();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelaMedicos;
+    private javax.swing.JTable TabelaPacientes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

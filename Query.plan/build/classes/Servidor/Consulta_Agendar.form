@@ -132,8 +132,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="CPFMedico">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="CPFPaciente">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="DataConsulta">
         </Component>

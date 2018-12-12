@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Cliente;
 
 import java.io.IOException;
@@ -212,6 +207,17 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
     }//GEN-LAST:event_ButaoCadastrarUsuarioActionPerformed
 
     private void ButaoCancelarCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButaoCancelarCadastroUsuarioActionPerformed
+        p = new Paciente_Objeto(
+                CPFCadastroUsuario.getText(),
+                NomeCadastroUsuario.getText(),
+                IdadeCadastroUsuario.getText(),
+                PesoCadastroUsuario.getText(),
+                AlturaCadastroUsuario.getText(),
+                LoginCadastroUsuario.getText(),
+                SenhaCadastroUsuario.getText()
+        );
+        
+        new Paciente_Menu(p).setVisible(true);
         dispose();
     }//GEN-LAST:event_ButaoCancelarCadastroUsuarioActionPerformed
 
@@ -252,6 +258,16 @@ public class Paciente_Cadastrar extends javax.swing.JFrame {
                 + AlturaCadastroUsuario.getText() + ";"
                 + LoginCadastroUsuario.getText() + ";"
                 + SenhaCadastroUsuario.getText();
+        
+        p = new Paciente_Objeto(
+                CPFCadastroUsuario.getText(),
+                NomeCadastroUsuario.getText(),
+                IdadeCadastroUsuario.getText(),
+                PesoCadastroUsuario.getText(),
+                AlturaCadastroUsuario.getText(),
+                LoginCadastroUsuario.getText(),
+                SenhaCadastroUsuario.getText()
+        );
         
         try {
             new Conectar().update(msg, "Paciente");

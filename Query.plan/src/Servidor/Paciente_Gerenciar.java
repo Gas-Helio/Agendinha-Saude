@@ -214,11 +214,11 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
         if (selecionados >= 0) {
             int op = JOptionPane.showConfirmDialog(this, "Deseja excluir esse componente?");
             if (op == 0) {
-                int cod = modeloTable.getCod(selecionados);
+                paciente = modeloTable.getComponentes(selecionados);
                 ArrayList<Paciente_Objeto> bean = new ArrayList<>();
                 selecionados = TabelaPacientes.convertRowIndexToModel(selecionados);
                 bean.add(modeloTable.getComponentes(selecionados));
-                deleta(cod);
+                deleta(paciente.getCPF());
 
                 for (Paciente_Objeto p : bean) {
                     dados = modeloTable.excluir(p);
@@ -229,17 +229,33 @@ public class Paciente_Gerenciar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void deleta(int cod) {
+    public void deleta(String cod) {
         bd.connection();
 
-        String sql = "DELETE FROM paciente WHERE Id = '" + cod + "'";
+        String sql = "DELETE FROM paciente WHERE CPF = '" + cod + "'";
 
         try {
             PreparedStatement stm = bd.con.prepareStatement(sql);
             stm.execute();
             stm.close();
+            ExcluirConPac(cod);
         } catch (SQLException ex) {
             Logger.getLogger(Medico_Gerenciar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void ExcluirConPac(String cod) {
+        bd.connection();
+        
+        String sql = "DELETE FROM consulta WHERE Id_Pac = " + cod;
+        
+        try {
+            PreparedStatement stm = bd.con.prepareStatement(sql);
+            stm.execute();
+            stm.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -5,22 +5,23 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Patrick
- */
 public class Consulta_Agendar extends javax.swing.JFrame {
 
     int aux;
-    String Id;
+    String Id, CPFM, CPFP;
     
-    public Consulta_Agendar(int x, String[] obj) {
+    public Consulta_Agendar(int x, String[] obj, String cpfm, String cpfp) {
+        CPFM = cpfm;
+        CPFP = cpfp;
         aux = x;
 
         initComponents();
         if (aux == 2) {
             Id = obj[0];
             Preencher(obj);
+        }else if(aux == 0){
+            CPFMedico.setText(CPFM);
+            CPFPaciente.setText(CPFP);
         }
     }
 
@@ -49,6 +50,10 @@ public class Consulta_Agendar extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agendar Consulta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         jLabel1.setText("CPF Médico:");
+
+        CPFMedico.setEditable(false);
+
+        CPFPaciente.setEditable(false);
 
         jLabel5.setText("Horario:");
 
@@ -255,7 +260,7 @@ public class Consulta_Agendar extends javax.swing.JFrame {
     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new Consulta_Agendar(0, null).setVisible(true);
+            new Consulta_Agendar(0, null, null, null).setVisible(true);
         });
     }
 

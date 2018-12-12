@@ -13,7 +13,10 @@ import javax.swing.JOptionPane;
 public class Conectar {
 
     Paciente_Objeto Pac;
-    ArrayList Med = new ArrayList();
+    Consulta_Objeto Con;
+    Medico_Objeto Med;
+    ArrayList<Consulta_Objeto> consultas = new ArrayList();
+    ArrayList<Medico_Objeto> medicos = new ArrayList();
 
     public Conectar() throws IOException {
         super();
@@ -62,39 +65,75 @@ public class Conectar {
         try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
             saida.println("Recuperar#" + msg + "#Paciente");
 
-            ServerSocket ss = new ServerSocket(5001);
-            Socket s = ss.accept();
-            Scanner leitor = new Scanner(s.getInputStream());
+            Scanner leitor = new Scanner(c.getInputStream());
 
             String linha = "";
-            System.out.println("Oia ele aq");
-            
+
             while (leitor.hasNext()) {
                 linha += leitor.nextLine();
             }
 
-            System.out.println(linha);
-            String[] coluna = linha.split(";");
+            if (!"".equals(linha)) {
+                System.out.println(linha);
+                String[] coluna = linha.split(";");
 
-            Pac = new Paciente_Objeto(coluna[0], coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6]);
+                Pac = new Paciente_Objeto(coluna[0], coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6]);
+            }
+
         } catch (IOException ex) {
             Logger.getLogger(Conectar.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Pac;
     }
 
-    public ArrayList RecebendoMedicos(String msg) throws IOException {
+    public ArrayList RecebendoConsultas(String msg) throws IOException {
         try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
-            saida.println("Recuperar#" + msg + "#Medico");
-            Scanner s = new Scanner(c.getInputStream());
-            String salvar = s.nextLine();
+            saida.println("Recuperar#" + msg + "#Consulta");
 
-            String[] coluna = salvar.split(";");
+            Scanner leitor = new Scanner(c.getInputStream());
 
-            Med.add(new Object[]{
-                coluna[0], coluna[1], coluna[3]
-            });
+            String linha = "";
+
+            while (leitor.hasNext()) {
+                linha += leitor.nextLine();
+            }
+
+            String[] linhas = linha.split("#");
+
+            for (int x = 0; x < linhas.length; x++) {
+                String[] coluna = linhas[x].split(";");
+                Con = new Consulta_Objeto(Integer.parseInt(coluna[0]), coluna[1], coluna[2], coluna[3], coluna[4]);
+                consultas.add(Con);
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Conectar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Med;
+        return consultas;
+    }
+
+    public ArrayList RecebendoMedicos() throws IOException {
+        try (Socket c = this.criarsock(); PrintStream saida = new PrintStream(c.getOutputStream())) {
+            saida.println("Recuperar# tudo #Medico");
+
+            Scanner leitor = new Scanner(c.getInputStream());
+
+            String salvar = "";
+
+            while (leitor.hasNext()) {
+                salvar += leitor.nextLine();
+            }
+
+            String[] linhas = salvar.split("#");
+
+            for (int x = 0; x < linhas.length; x++) {
+                String[] coluna = linhas[x].split(";");
+                medicos.add(new Medico_Objeto(coluna[0], coluna[1], coluna[2]));
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Conectar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return medicos;
     }
 }

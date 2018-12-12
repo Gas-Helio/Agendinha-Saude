@@ -1,18 +1,13 @@
 package Cliente;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Patrick
- */
 public class Cliente_Master extends javax.swing.JFrame {
     
-    private int v = 0;
+    private final int v = 0;
     
     public Cliente_Master() {
         initComponents();
@@ -158,6 +153,8 @@ public class Cliente_Master extends javax.swing.JFrame {
                 
             }else{
                 JOptionPane.showMessageDialog(this, "Paciente não encontrado!!");
+                dispose();
+                new Cliente_Master().setVisible(true);
             }
             
         } catch (IOException ex) {
