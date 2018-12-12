@@ -32,7 +32,7 @@ CREATE TABLE `paciente` (
   `Login` varchar(15) NOT NULL,
   `Senha` varchar(15) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (1,'1','1','1','1','1','1','1'),(2,'4','4','4','4','4','4','4'),(3,'6','6','6','6','6','6','6');
+INSERT INTO `paciente` VALUES (4,'59','Rafael','60','70','2','60','60'),(8,'5','5','5','5','5','5','5');
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-03 15:56:26
+-- Dump completed on 2018-12-11 22:39:15
